@@ -15,3 +15,5 @@ router.get('/', (req, res) => {
 router.get('/again', (req, res) => {
     res.render('stop', {again : true});
 });
+
+// new feature! hip hip hooray!
