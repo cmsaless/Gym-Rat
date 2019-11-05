@@ -35,3 +35,7 @@ footer {
 .btn-navbar {
     margin-left: 1rem;
 }
+
+.modal-backdrop {
+    z-index: 1020;
+}
