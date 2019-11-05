@@ -13,5 +13,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/index', (req, res) => {
+    res.locals.logged = true;
     res.render('index');
 });
