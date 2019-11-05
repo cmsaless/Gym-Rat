@@ -15,3 +15,5 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     res.render('info', {id : req.params.id});
 });
+
+// bug fix oh no!
