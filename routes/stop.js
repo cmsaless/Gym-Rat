@@ -13,7 +13,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/again', (req, res) => {
-    res.render('stop', {again : true});
+    var b = req.query.b == 'true' ? true : false;
+    res.render('stop', {again : b});
 });
 
 // new feature is done!

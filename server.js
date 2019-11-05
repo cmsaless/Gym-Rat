@@ -12,19 +12,24 @@ const passport = require('passport');
 const app = express();
 const port = 4444;
 
+// This variable points to the directory of the routes.
 const __routesdir = __dirname + "/routes/"
 
+// This tells the app to serve static HTML files from the server as our views.
 app.use(express.static(path.join(__dirname, 'views')));
 
+// This tells the app to use the handlebars engine to render our views.
 app.engine('hbs', exphbs({
     defaultLayout: 'main',
     helpers: {},
     extname: '.hbs'
 }));
-
 app.set('view engine', 'hbs');
+
+// Telling the server what directory the view files are located in.
 app.set('views', __dirname + '/views');
 
+// Setting up the various routes for the pages.
 const index = require(__routesdir + 'index');
 app.use('/', index);
 
