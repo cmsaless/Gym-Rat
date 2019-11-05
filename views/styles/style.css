@@ -27,6 +27,10 @@ footer {
     padding-bottom: 2.5rem;
 }
 
+.register-info {
+    color: #495057
+}
+
 .fakeimg {
     height: 300px;
     background: #aaa;
