@@ -38,7 +38,7 @@ footer {
 .fakeimg-sm {
     height: 200px;
     background: #aaa;
-        
+
 }
 
 .fakeimg-lg {
@@ -52,6 +52,18 @@ footer {
 
 .btn-col-login {
     width: 10rem;
+}
+
+.p-frontpage-info {
+    margin: auto;
+    width: 35rem;
+    text-align: center;
+}
+
+.btn-col-login {
+    width: 10rem;
+    height: 5rem;
+    font-size: 2rem;
 }
 
 @media screen and (max-width: 767px) {
