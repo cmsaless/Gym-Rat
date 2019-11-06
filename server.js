@@ -33,6 +33,12 @@ app.set('views', __dirname + '/views');
 const index = require(__routesdir + 'index');
 app.use('/', index);
 
+const about = require(__routesdir + 'about');
+app.use('/about', about);
+
+const news = require(__routesdir + 'news');
+app.use('/news', news);
+
 const stop = require(__routesdir + 'stop');
 app.use('/stop', stop);
 

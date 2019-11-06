@@ -9,10 +9,5 @@ router.all('/*', (req, res ,next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('index');
-});
-
-router.get('/index', (req, res) => {
-    res.locals.logged_in = true;
-    res.render('index');
+    res.render('about');
 });

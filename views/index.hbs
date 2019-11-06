@@ -1,10 +1,11 @@
+{{#if logged_in}}
 <div class='container'>
     <div class='row'>
         <div class='col-md-8' id='col-main-content'>
-            <h1>Welcome to Gym Rat 🐀!</h1>
+            <h1>Welcome back to Gym Rat 🐀!</h1>
             <h4>But what is Gym Rat?</h4>
             <br />
-            <div class='fakeimg'>
+            <div class='fakeimg-lg'>
                 Fake image
             </div>
             <p><i>This photo has yet to be taken because I'm lazy!</i></p>
@@ -25,9 +26,54 @@
                 <b>Sign up today so that you can begin (or continue!) your fitness journey! For free too!</b>
             </p>
         </div>
-        <hr id='hr-col-separator' />
         <div class='col-md-4' id='col-newsfeed'>
             {{> newsFeed}}
         </div>
     </div>
 </div>
+{{else}}
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-12' id='col-login'>
+            <h1>Welcome to Gym Rat 🐀!</h1>
+            <h4>Please sign up!</h4>
+            <br />
+            <button class='btn btn-primary btn-login-col btn-lg'>Login</button>
+            <button class='btn btn-secondary btn-login-col btn-lg'>Register</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-12'>
+            <br />
+            <br />
+
+            <p>
+                blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                blah blah blah blah blah blah blah blah
+            </p>
+
+            <br />
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-3'>
+            <div class='fakeimg-sm'>
+                Fake image
+            </div>
+        </div>
+        <div class='col-md-6'>
+            <div class='fakeimg-lg'>
+                Fake image
+            </div>
+        </div>
+        <div class='col-md-3'>
+            <div class='fakeimg-sm'>
+                Fake image
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
