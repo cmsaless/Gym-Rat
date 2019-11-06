@@ -1,9 +1,8 @@
 <div class='container'>
     <div class='row'>
-        <div class='col-md-8'>
+        <div class='col-md-8' id='col-main-content'>
             <h1>Welcome to Gym Rat 🐀!</h1>
             <h4>But what is Gym Rat?</h4>
-            <br />
             <br />
             <div class='fakeimg'>
                 Fake image
@@ -12,7 +11,7 @@
             <p>
                 So let's talk. This is a website meant for people who want a light-weight exercise tracking web app that doesn't bundle a
                 bunch of social media junk. Let's just be honest: no one wants to be going around sharing with their friends
-                and coworkers how much they weigh or how often we all don't actually exercise!
+                and coworkers how much they weigh or how often we all don't actually exercise.
             </p>
             <!--
             <p>
@@ -23,10 +22,11 @@
             </p>
             -->
             <p>
-                <b>Sign up today so that you can begin (or continue!) your exercise experience! For free too!</b>
+                <b>Sign up today so that you can begin (or continue!) your fitness journey! For free too!</b>
             </p>
         </div>
-        <div class='col-md-4'>
+        <hr id='hr-col-separator' />
+        <div class='col-md-4' id='col-newsfeed'>
             {{> newsFeed}}
         </div>
     </div>
