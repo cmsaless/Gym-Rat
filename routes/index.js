@@ -16,3 +16,7 @@ router.get('/index', (req, res) => {
     res.locals.logged_in = true;
     res.render('index');
 });
+
+router.post('/register', (req, res) => {
+    
+});
