@@ -1,8 +1,8 @@
 const express = require('express');
+const User = require('../models/User');
 const passport = require('passport');
 
 const router = express.Router();
-module.exports = router;
 
 router.all('/*', (req, res ,next) => {
     next();
@@ -18,5 +18,17 @@ router.get('/index', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    
+    const newUser = new User({
+        username : req.body.username,
+        email : req.body.email.toLowerCase(),
+        password : req.body.password
+    });
+
+    newUser.save().then(savedUser => {
+        console.log("success");
+    }).catch(err => {
+        console.log("failed");
+    });
 });
+
+module.exports = router;

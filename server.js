@@ -14,6 +14,9 @@ const passport = require('passport');
 const app = express();
 const port = 4444;
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 // Allowing mongoose to use the global promise functionality (resolves an error)
 mongoose.Promise = global.Promise;
 
