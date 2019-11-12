@@ -49,3 +49,5 @@ var Validators = {
         return re.test(String(email).toLowerCase());
     }
 };
+
+module.exports = Validators;
