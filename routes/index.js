@@ -4,7 +4,7 @@ const passport = require('passport');
 
 const router = express.Router();
 
-router.all('/*', (req, res ,next) => {
+router.all('/*', (req, res, next) => {
     next();
 });
 
