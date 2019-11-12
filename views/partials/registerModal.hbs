@@ -35,7 +35,6 @@
                         <input name='passwordConfirm' type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirm password">
                         <small id='passwordLabel' class="form-text text-muted">Passwords must be at least 8 characters long
                             and contain at least one number and one alphabetical character.</small>
-                        <br />
                     </div>
                     <span id='passwordAlert' style='color: red'></span>
                 </div>
@@ -50,23 +49,65 @@
 <script src="/functions/validators.js"></script>
 <script>
     function checkAllValidators() {
-        Validators.test();
+        
+        let noErrors = true;
 
-        // Check if username is valid
-
-        // Check if emails match
-
-        // Check if email is valid
-
-        // Check if passwords match
-        if ($('#inputPassword').val() != $('#inputPasswordConfirm').val()) {
-            $('#passwordAlert').text("Passwords don't match!");
-            return;
+        /********** Username Validation **********/
+        let username = $('#inputUsername').val();
+        let validName = 3 < username.length ? true : false;
+        
+        if (!validName) {
+            $('#usernameAlert').text("Username is not valid!");
+            noErrors = false;
+        } else {
+            $('#usernameAlert').text("");
         }
+        /********** End Username Validation **********/
 
-        // Check if password is valid
-        $('#inputPassword')
 
-        $('#registerForm').submit();
+        /********** Email Validation **********/
+        let email = $('#inputEmail').val();
+        let emailConf = $('#inputEmailConfirm').val();
+
+        let validEmail = Validators.validateEmail(email);
+
+        // Check if emails match.
+        if (email != emailConf) {
+            $('#emailAlert').text("Emails don't match!");
+            noErrors = false;
+        // If emails match, check if email is valid.
+        } else if (!validEmail) {
+            $('#emailAlert').text("Email is not valid!");
+            noErrors = false;
+        } else {
+            $('#emailAlert').text("");
+        }
+        /********** End Email Validation **********/
+
+
+        /********** Password Validation **********/
+        let pswd = $('#inputPassword').val();
+        let pswdConf = $('#inputPasswordConfirm').val();
+
+        let tuple = Validators.validatePassword(pswd)
+        let validPswd = tuple[0];
+        let message = tuple[1];
+
+        // Check if passwords match.
+        if (pswd != pswdConf) {
+            $('#passwordAlert').text("Passwords don't match!");
+            noErrors = false;
+        // If passwords match, check if password is valid.
+        } else if (!validPswd) {
+            $('#passwordAlert').text(message);
+            noErrors = false;
+        } else {
+            $('#passwordAlert').text("");
+        }
+        /********** End Password Validation **********/
+
+        if (noErrors) {
+            $('#registerForm').submit();
+        }
     }
 </script>

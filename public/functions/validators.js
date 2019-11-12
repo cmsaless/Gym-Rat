@@ -2,7 +2,8 @@ var Validators = {
 
     /**
      * Check if passed in password is valid. Returns a tuple in this format: 
-     * [bool, message].
+     * [bool, message]. The bool is true if the password is valid, false o.w..
+     * If false, the message explains why the password isn't valid.
      * 
      * @param {string} password 
      * @return a tuple with a bool and string
@@ -31,14 +32,20 @@ var Validators = {
         }
 
         if (hasAlpha && hasNum) {
-            return [true, "Good to go!"];
+            return [true, ""];
         } else {
             return [false, "Not a valid password!"];
         }
     },
 
-    test: function test() {
-        console.log("Yes?");
+    /**
+     * Check if email is valid.
+     * 
+     * @param {string} email
+     * @return a bool; true if valid, false otherwise.
+     */
+    validateEmail: function validateEmail(email) {
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
     }
-
 };
