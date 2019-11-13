@@ -1,5 +1,5 @@
-var assert = require('assert');
-let Validators = require('../public/functions/validators.js');
+const assert = require('assert');
+const Validators = require('../public/functions/validators.js');
 
 describe('/public/functions/validators.js', () => {
     describe('validatePassword', () => {
