@@ -1,5 +1,5 @@
 {
-  "name": "express",
+  "name": "Gym Rat",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -16,6 +16,7 @@
     "mongoose": "^5.7.10",
     "nodemon": "^1.19.4",
     "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7"
   },
   "devDependencies": {},

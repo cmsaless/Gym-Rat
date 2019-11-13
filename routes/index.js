@@ -3,6 +3,7 @@ const User = require('../models/User');
 const Validators = require('../public/functions/validators.js');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 const router = express.Router();
 
@@ -22,7 +23,7 @@ router.get('/index', (req, res) => {
 router.post('/login', (req, res) => {
 
     // Check if a user like that even exists in the database
-    User.findOne({email: req.body.email}).exec((err, user) => {
+    User.findOne({ email: req.body.email }).exec((err, user) => {
         if (err) console.log(err);
         if (!user) return;
 
@@ -64,6 +65,10 @@ router.post('/register', (req, res) => {
 
             // Submit new User model to DB.
             newUser.save().then(savedUser => {
+                passport.authenticate('local')(req, res, () => {
+                    User.findOne({email: newUser.email}, (err, person) => {});
+                });
+
                 res.redirect(302, '/');
             }).catch(err => {
                 console.log("failed: ", err);

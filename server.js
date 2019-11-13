@@ -51,6 +51,24 @@ app.engine('hbs', exphbs({
 }));
 app.set('view engine', 'hbs');
 
+// Setting up session
+app.use(session({
+    secret: 'chrisisbest',
+    resave: true,
+    saveUninitialized: true
+}));
+
+// Adding passport for auth.
+app.use(passport.initialize());
+app.use(passport.session());
+
+// This lets us use variables across routes
+app.use((req, res, next) => {
+    // Give the user a variable, make it null if no user
+    res.locals.user = req.user || null;
+    next();
+});
+
 // Telling the server what directory the view files are located in.
 app.set('views', __dirname + '/views');
 
