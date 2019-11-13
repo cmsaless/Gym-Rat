@@ -54,7 +54,7 @@ app.set('view engine', 'hbs');
 // Telling the server what directory the view files are located in.
 app.set('views', __dirname + '/views');
 
-// This variable points to the directory of the routes.
+// This variable points to the directory where the route files are.
 const __routesdir = __dirname + "/routes/"
 
 // Setting up the various routes for the pages.
