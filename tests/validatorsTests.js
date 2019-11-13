@@ -1,7 +1,7 @@
 var assert = require('assert');
-let Validators = require('../validators.js');
+let Validators = require('../public/functions/validators.js');
 
-describe('Validation', () => {
+describe('/public/functions/validators.js', () => {
     describe('validatePassword', () => {
         it('should return false; too short', () => {
             let pswd = 'abc1234';
@@ -38,6 +38,37 @@ describe('Validation', () => {
             let tuple = Validators.validatePassword(pswd)
             assert.equal(true, tuple[0]);
         });
-        
+    });
+    describe('validateEmail', () => {
+        it('should return false; not valid', () => {
+            let email = 'a';
+            let res = Validators.validateEmail(email);
+            assert.equal(false, res);
+        });
+        it('should return false; not valid', () => {
+            let email = 'a@';
+            let res = Validators.validateEmail(email);
+            assert.equal(false, res);
+        });
+        it('should return false; not valid', () => {
+            let email = 'a@a';
+            let res = Validators.validateEmail(email);
+            assert.equal(false, res);
+        });
+        it('should return false; not valid', () => {
+            let email = 'a@a.';
+            let res = Validators.validateEmail(email);
+            assert.equal(false, res);
+        });
+        it('should return false; not valid', () => {
+            let email = 'a@a.a';
+            let res = Validators.validateEmail(email);
+            assert.equal(false, res);
+        });
+        it('should return true; is valid', () => {
+            let email = 'a@a.aa';
+            let res = Validators.validateEmail(email);
+            assert.equal(true, res);
+        });
     });
 });

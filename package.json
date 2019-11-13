@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "connect-flash": "^0.1.1",
@@ -19,9 +20,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "mocha 'public/functions/tests/test.js'",
     "start": "node server.js",
-    "nodemon": "nodemon server.js"
+    "nodemon": "nodemon server.js",
+    "test": "mocha ./tests/*.js"
   },
   "author": "",
   "license": "ISC"

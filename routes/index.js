@@ -18,6 +18,15 @@ router.get('/index', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
+
+    // ensure everything is there and valid (and the confirm-fields are same)
+
+    // salt and hash that password (make new fn)
+
+    // make a new User object to add to DB
+
+    // submit to DB but check for exceptions
+
     const newUser = new User({
         username : req.body.username,
         email : req.body.email.toLowerCase(),

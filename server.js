@@ -14,24 +14,34 @@ const passport = require('passport');
 const app = express();
 const port = 4444;
 
+/********** Maintenance **********/
+const ONGOING_MAINTENANCE = false;
+app.use('/*', (req, res, next) => {
+    if (ONGOING_MAINTENANCE) {
+        res.send("Gym Rat is currently down for maintenance!");
+    } else {
+        next();
+    }
+})
+/********** End Maintenance **********/
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+// This tells the app look in the "public" folder for static items (js, css, images).
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Allowing mongoose to use the global promise functionality (resolves an error)
 mongoose.Promise = global.Promise;
 
 // Making the database connection to MongoDB
-// Database container -> port 27017 -> database "dopat"
-// 'mongodb' gets resolved by the internal docker network to the mongodb container
-mongoose.connect('mongodb://localhost:27017/Gym-Rat', { useNewUrlParser: true, useUnifiedTopology: true })
+// Database container -> port 27017 -> database "Gym-Rat"
+mongoose.connect('mongodb://localhost:27017/Gym-Rat', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(db => {
         console.log('Database connected');
     }).catch(err => {
         console.log('Database connection failed');
     });
-
-// This tells the app look in the "public" folder for static items (js, css, images).
-app.use(express.static(path.join(__dirname, 'public')));
 
 // This tells the app to use the handlebars engine to render our views.
 app.engine('hbs', exphbs({
@@ -43,17 +53,6 @@ app.set('view engine', 'hbs');
 
 // Telling the server what directory the view files are located in.
 app.set('views', __dirname + '/views');
-
-// maintenance 
-const ONGOING_MAINTENANCE = false;
-app.use('/*', (req, res, next) => {
-    if (ONGOING_MAINTENANCE) {
-        res.send("Gym Rat is currently down for maintenance!");
-    } else {
-        next();
-    }
-})
-// end maintenance
 
 // This variable points to the directory of the routes.
 const __routesdir = __dirname + "/routes/"
