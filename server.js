@@ -71,7 +71,10 @@ const stop = require(__routesdir + 'stop');
 app.use('/stop', stop);
 
 const info = require(__routesdir + 'info');
-app.use('/info', info)
+app.use('/info', info);
+
+const profile = require(__routesdir + 'profile');
+app.use('/profile', profile);
 
 app.listen(port, () => {
     console.log("Listening on port: " + port);

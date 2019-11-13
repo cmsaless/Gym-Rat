@@ -19,6 +19,23 @@ router.get('/index', (req, res) => {
     res.render('index');
 });
 
+router.post('/login', (req, res) => {
+
+    // Check if a user like that even exists in the database
+    User.findOne({email: req.body.email}).exec((err, user) => {
+        if (err) console.log(err);
+        if (!user) return;
+
+        // If there is one, hash the entered password and compare
+        bcrypt.compare(req.body.password, user.password, (err, res) => {
+            if (!res) return;
+
+            res.locals.user = user;
+            res.redirect(302, '/profile');
+        });
+    });
+});
+
 router.post('/register', (req, res) => {
 
     // Ensure everything is there and valid.
@@ -29,6 +46,10 @@ router.post('/register', (req, res) => {
     if (!allValid) {
         return;
     }
+
+    // Check to make sure that email isn't already in use
+
+    // TODO: verify the email is real by sending an email to it
 
     // Salt and hash the password.
     bcrypt.genSalt(10, (err, salt) => {
@@ -43,12 +64,14 @@ router.post('/register', (req, res) => {
 
             // Submit new User model to DB.
             newUser.save().then(savedUser => {
-                console.log("success");
+                res.redirect(302, '/');
             }).catch(err => {
                 console.log("failed: ", err);
             });
         });
     });
+
+    // TODO: Send a 'please verify' email to confirm user owns this
 });
 
 /********** Helper Functions **********/
@@ -61,20 +84,6 @@ function checkAllValidators(username, email, emailConf, pswd, pswdConf) {
     if (!Validators.validatePassword(pswd)) return false;
 
     return true;
-}
-
-function saltAndHashPassword(passwordPlain) {
-
-    let passwordSaltedAndHashed = '';
-
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(passwordPlain, salt, (err, hash) => {
-            passwordSaltedAndHashed = hash;
-            console.log('hash ', hash);
-        });
-    });
-
-    return passwordSaltedAndHashed;
 }
 /********** End Helper Functions **********/
 
