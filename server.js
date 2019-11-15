@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const mongoose = require('mongoose');
+const User = require('./models/User');
 
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
@@ -61,6 +62,52 @@ app.use(session({
 // Adding passport for auth.
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    User.findOne({
+        _id: id
+    }, '-password -salt', function (err, user) {
+        done(err, user);
+    });
+});
+
+var LocalStrategy = require('passport-local').Strategy;
+
+// passport.use(new LocalStrategy((email, password, done) => {
+//     User.findOne({
+//         email: email
+//     }, (err, user) => {
+//         // This is how you handle error
+//         if (err) return done(err);
+//         // When user is not found
+//         if (!user) return done(null, false);
+//         // When password is not correct
+//         if (!user.authenticate(password)) return done(null, false);
+//         // When all things are good, we return the user
+//         return done(null, user);
+//      });
+// }));
+passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+    User.findOne({ email: email.toLowerCase() }).then(user => {
+        if (!user) {
+            return done(null, false, { message: 'No user found' });
+        }
+        bcrypt.compare(password, user.password, (err, matched) => {
+            if (err) return err;
+
+            if (matched) {
+                return done(null, user);
+            }
+            else {
+                return done(null, false, { message: 'Incorrect password' });
+            }
+        });
+    });
+}));
 
 // This lets us use variables across routes
 app.use((req, res, next) => {

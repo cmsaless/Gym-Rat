@@ -3,7 +3,6 @@ const User = require('../models/User');
 const Validators = require('../public/functions/validators.js');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
 
 const router = express.Router();
 
@@ -22,6 +21,9 @@ router.get('/index', (req, res) => {
 
 router.post('/login', (req, res) => {
 
+    console.log(req.body.email);
+    console.log(req.body.password);
+
     // Check if a user like that even exists in the database
     User.findOne({ email: req.body.email }).exec((err, user) => {
         if (err) console.log(err);
@@ -29,9 +31,9 @@ router.post('/login', (req, res) => {
 
         // If there is one, hash the entered password and compare
         bcrypt.compare(req.body.password, user.password, (err, res) => {
-            if (!res) return;
+            if (!res) console.log('wrong pswd');
 
-            res.locals.user = user;
+            res.session.passport.user = user;
             res.redirect(302, '/profile');
         });
     });
