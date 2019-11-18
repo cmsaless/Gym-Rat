@@ -11,6 +11,9 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
+    if (req.user) {
+        console.log(req.user);
+    }
     res.render('index');
 });
 
@@ -19,25 +22,10 @@ router.get('/index', (req, res) => {
     res.render('index');
 });
 
-router.post('/login', (req, res) => {
-
-    console.log(req.body.email);
-    console.log(req.body.password);
-
-    // Check if a user like that even exists in the database
-    User.findOne({ email: req.body.email }).exec((err, user) => {
-        if (err) console.log(err);
-        if (!user) return;
-
-        // If there is one, hash the entered password and compare
-        bcrypt.compare(req.body.password, user.password, (err, res) => {
-            if (!res) console.log('wrong pswd');
-
-            res.session.passport.user = user;
-            res.redirect(302, '/profile');
-        });
-    });
-});
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/profile',
+    failureRedirect: '/stop'
+}));
 
 router.post('/register', (req, res) => {
 
@@ -67,10 +55,6 @@ router.post('/register', (req, res) => {
 
             // Submit new User model to DB.
             newUser.save().then(savedUser => {
-                passport.authenticate('local')(req, res, () => {
-                    User.findOne({email: newUser.email}, (err, person) => {});
-                });
-
                 res.redirect(302, '/');
             }).catch(err => {
                 console.log("failed: ", err);

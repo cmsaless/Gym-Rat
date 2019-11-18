@@ -8,6 +8,9 @@ const User = require('./models/User');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 
+const bcrypt = require('bcryptjs');
+
+const cookieparser = require('cookie-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
@@ -26,8 +29,8 @@ app.use('/*', (req, res, next) => {
 })
 /********** End Maintenance **********/
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+//app.use(bodyParser.json())
 
 // This tells the app look in the "public" folder for static items (js, css, images).
 app.use(express.static(path.join(__dirname, 'public')));
@@ -53,68 +56,51 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs');
 
 // Setting up session
+app.use(cookieparser());
 app.use(session({
     secret: 'chrisisbest',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { maxAge: 120000 }
 }));
-
-// Adding passport for auth.
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(flash());
 
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
-
 passport.deserializeUser((id, done) => {
-    User.findOne({
-        _id: id
-    }, '-password -salt', function (err, user) {
-        done(err, user);
+    User.findById(id, (err, user) => {
+        if (err) return err;
+        done(null, user);
     });
 });
 
 var LocalStrategy = require('passport-local').Strategy;
-
-// passport.use(new LocalStrategy((email, password, done) => {
-//     User.findOne({
-//         email: email
-//     }, (err, user) => {
-//         // This is how you handle error
-//         if (err) return done(err);
-//         // When user is not found
-//         if (!user) return done(null, false);
-//         // When password is not correct
-//         if (!user.authenticate(password)) return done(null, false);
-//         // When all things are good, we return the user
-//         return done(null, user);
-//      });
-// }));
-passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+}, (email, password, done) => {
+    console.log("going");
     User.findOne({ email: email.toLowerCase() }).then(user => {
         if (!user) {
+            console.log("not found");
             return done(null, false, { message: 'No user found' });
         }
         bcrypt.compare(password, user.password, (err, matched) => {
             if (err) return err;
-
             if (matched) {
+                console.log("matched")
                 return done(null, user);
-            }
-            else {
+            } else {
+                console.log("not matched")
                 return done(null, false, { message: 'Incorrect password' });
             }
-        });
+        })
     });
 }));
 
-// This lets us use variables across routes
-app.use((req, res, next) => {
-    // Give the user a variable, make it null if no user
-    res.locals.user = req.user || null;
-    next();
-});
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Telling the server what directory the view files are located in.
 app.set('views', __dirname + '/views');
