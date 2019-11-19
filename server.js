@@ -1,18 +1,16 @@
 const express = require('express');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+
 const bodyParser = require('body-parser');
 const path = require('path');
 
 const mongoose = require('mongoose');
 const User = require('./models/User');
 
-const exphbs = require('express-handlebars');
-const methodOverride = require('method-override');
-
 const bcrypt = require('bcryptjs');
-
-const cookieparser = require('cookie-parser');
 const flash = require('connect-flash');
-const session = require('express-session');
+const cookieparser = require('cookie-parser');
 const passport = require('passport');
 
 const app = express();
@@ -32,9 +30,6 @@ app.use('/*', (req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }))
 //app.use(bodyParser.json())
 
-// This tells the app look in the "public" folder for static items (js, css, images).
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Allowing mongoose to use the global promise functionality (resolves an error)
 mongoose.Promise = global.Promise;
 
@@ -47,15 +42,8 @@ mongoose.connect('mongodb://localhost:27017/Gym-Rat', { useNewUrlParser: true, u
         console.log('Database connection failed');
     });
 
-// This tells the app to use the handlebars engine to render our views.
-app.engine('hbs', exphbs({
-    defaultLayout: 'main',
-    helpers: {},
-    extname: '.hbs'
-}));
-app.set('view engine', 'hbs');
-
-// Setting up session
+// Setting up message flashing, cookie parsing, and the session.
+app.use(flash());
 app.use(cookieparser());
 app.use(session({
     secret: 'chrisisbest',
@@ -63,11 +51,13 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 120000 }
 }));
-app.use(flash());
 
+// Serializing the user will store their id as a cookie in the client's browser.
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
+
+// Deserializing means to use the id in the client's cookie to find the corresponding user.
 passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
         if (err) return err;
@@ -75,32 +65,40 @@ passport.deserializeUser((id, done) => {
     });
 });
 
+// Set up the local strategy to describe how we'll authenticate users when they log in.
 var LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, (email, password, done) => {
-    console.log("going");
     User.findOne({ email: email.toLowerCase() }).then(user => {
         if (!user) {
-            console.log("not found");
             return done(null, false, { message: 'No user found' });
         }
         bcrypt.compare(password, user.password, (err, matched) => {
             if (err) return err;
             if (matched) {
-                console.log("matched")
                 return done(null, user);
             } else {
-                console.log("not matched")
                 return done(null, false, { message: 'Incorrect password' });
             }
         })
     });
 }));
 
+// Have the server use passport and its session.
 app.use(passport.initialize());
 app.use(passport.session());
+
+// This tells the app to use the handlebars engine to render our views.
+app.engine('hbs', exphbs({
+    defaultLayout: 'main',
+    extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
+
+// This tells the app look in the "public" folder for static items (js, css, images).
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Telling the server what directory the view files are located in.
 app.set('views', __dirname + '/views');
@@ -127,6 +125,7 @@ app.use('/info', info);
 const profile = require(__routesdir + 'profile');
 app.use('/profile', profile);
 
+// Good to go! Let's listen for connections now.
 app.listen(port, () => {
     console.log("Listening on port: " + port);
 });

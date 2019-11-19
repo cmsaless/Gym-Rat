@@ -24,7 +24,7 @@
   "scripts": {
     "start": "node server.js",
     "nodemon": "nodemon server.js",
-    "test": "mocha ./tests/*.js"
+    "tests": "mocha ./tests/*.js"
   },
   "author": "",
   "license": "ISC"
