@@ -1,34 +1,3 @@
-{{#if logged_in}}
-<div class='container'>
-    <div class='row'>
-        <div class='col-md-8' id='col-main-content'>
-            <h1>Welcome back to Gym Rat 🐀!</h1>
-            <h4>But what is Gym Rat?</h4>
-            <br />
-            <div class='fakeimg-lg'>
-                Fake image
-            </div>
-            <p><i>This photo has yet to be taken because I'm lazy!</i></p>
-            <p>
-                So let's talk. This is a website meant for people who want a light-weight exercise tracking web app that doesn't bundle a
-                bunch of social media junk. Let's just be honest: no one wants to be going around sharing with their friends
-                and coworkers how much they weigh or how often we all don't actually exercise.
-            </p>
-            <!--
-            <p>
-                In addition a lot of simple, quality-of-life features that you would expect to be available in every workout app are so often
-                greedily locked behind paywalls as well (Looking at you MyFitnessPal) and this service will offer these features
-                for free, for everyone. Boy is my face going to be red if this site ever takes off and I start charging people
-                for "Pro Accounts" or the ability to convert between simple measurements.
-            </p>
-            -->
-        </div>
-        <div class='col-md-4' id='col-newsfeed'>
-            {{> newsFeed}}
-        </div>
-    </div>
-</div>
-{{else}}
 <div class='container'>
     <div class='row'>
         <div class='col-md-12 page-title' id='col-login'>
@@ -68,4 +37,3 @@
         </div>
     </div>
 </div>
-{{/if}}

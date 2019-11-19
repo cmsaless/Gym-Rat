@@ -7,25 +7,35 @@ const passport = require('passport');
 const router = express.Router();
 
 router.all('/*', (req, res, next) => {
+    res.locals.logged_in = req.user != null;
     next();
 });
 
 router.get('/', (req, res) => {
-    if (req.user) {
-        console.log(req.user);
+    if (res.locals.logged_in) {
+        res.locals.user = req.user;
+        res.render('dashboard');
+    } else {
+        res.render('index');
     }
-    res.render('index');
 });
 
-router.get('/index', (req, res) => {
-    res.locals.logged_in = true;
-    res.render('index');
-});
+// router.post('/login', passport.authenticate('local', {
+//     successRedirect: '/profile',
+//     failureRedirect: '/stop'
+// }));
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/profile',
-    failureRedirect: '/stop'
-}));
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', function (err, user, info) {
+        if (err) return next(err);
+        if (!user) return res.redirect('/stop');
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+            res.locals.logged_in = true;
+            return res.redirect('/profile');
+        });
+    })(req, res, next);
+});
 
 router.post('/register', (req, res) => {
 

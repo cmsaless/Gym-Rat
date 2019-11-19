@@ -1,3 +1,6 @@
 <h1>
     Hi, {{{user.username}}}
+    {{#if user.isAdmin}}
+    <p title='Admin' style='cursor: default'>⭐</p>
+    {{/if}}
 </h1>

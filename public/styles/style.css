@@ -46,6 +46,14 @@ footer {
     margin-left: 0.3rem;
 }
 
+.profile-link {
+    color: white !important;
+}
+
+.profile-link:hover {
+    color: lightblue !important;
+}
+
 .btn-col-login {
     width: 10rem;
 }
