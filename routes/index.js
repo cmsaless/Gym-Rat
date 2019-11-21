@@ -7,23 +7,16 @@ const passport = require('passport');
 const router = express.Router();
 
 router.all('/*', (req, res, next) => {
-    res.locals.logged_in = req.user != null;
     next();
 });
 
 router.get('/', (req, res) => {
     if (res.locals.logged_in) {
-        res.locals.user = req.user;
         res.render('dashboard');
     } else {
         res.render('index');
     }
 });
-
-// router.post('/login', passport.authenticate('local', {
-//     successRedirect: '/profile',
-//     failureRedirect: '/stop'
-// }));
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', function (err, user, info) {
@@ -31,7 +24,6 @@ router.post('/login', (req, res, next) => {
         if (!user) return res.redirect('/stop');
         req.logIn(user, (err) => {
             if (err) return next(err);
-            res.locals.logged_in = true;
             return res.redirect('/profile');
         });
     })(req, res, next);

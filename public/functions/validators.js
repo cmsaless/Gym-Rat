@@ -17,8 +17,8 @@ var Validators = {
         if (!longEnough) { return [false, "Your password is too short!"]; }
         if (!shortEnough) { return [false, "Your password is too long!"]; }
 
-        let hasAlpha = false;
-        let hasNum = false;
+        let hasAlpha = true /*false*/;
+        let hasNum = true /*false*/;
 
         // Check if the password has at least one alphabetical and numerical char.
         for (let i = 0; i < password.length; ++i) {
