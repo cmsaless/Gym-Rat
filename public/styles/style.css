@@ -23,8 +23,19 @@ footer {
     min-height: 100vh;
 }
 
+#input-confirm {
+    margin-top: 0.5rem;
+}
+
 #content {
     padding-bottom: 2.5rem;
+}
+
+#danger-zone {
+    border-style: dashed;
+    border-width: 1px;
+    border-color: red;
+    padding: 2rem;
 }
 
 .register-info {
@@ -34,7 +45,6 @@ footer {
 .fakeimg-sm {
     height: 200px;
     background: #aaa;
-
 }
 
 .fakeimg-lg {
@@ -46,8 +56,28 @@ footer {
     margin-left: 0.3rem;
 }
 
+.btn-profile {
+    height: 80%;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 3rem;
+}
+
+.div-btn-panel {
+    height: 15rem;
+}
+
+.div-settings-panel .btn {
+    margin-top: 0.5rem;
+}
+
 .profile-link {
+    text-align: center;
+}
+
+.profile-link a {
     color: white !important;
+    font-size: 1.2rem !important;
 }
 
 .profile-link:hover {
@@ -87,6 +117,7 @@ footer {
 .update-box:hover {
     border-color: lightblue;
     background-color: lightblue;
+    color: white;
 }
 
 @media screen and (max-width: 767px) {

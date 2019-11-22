@@ -21,15 +21,15 @@ var Validators = {
         let hasNum = true /*false*/;
 
         // Check if the password has at least one alphabetical and numerical char.
-        for (let i = 0; i < password.length; ++i) {
-            let ascii = password.charCodeAt(i);
-            if ((65 <= ascii && ascii <= 90) || (97 <= ascii && ascii <= 122)) {
-                hasAlpha = true;
-            }
-            if (48 <= ascii && ascii <= 57) {
-                hasNum = true;
-            }
-        }
+        // for (let i = 0; i < password.length; ++i) {
+        //     let ascii = password.charCodeAt(i);
+        //     if ((65 <= ascii && ascii <= 90) || (97 <= ascii && ascii <= 122)) {
+        //         hasAlpha = true;
+        //     }
+        //     if (48 <= ascii && ascii <= 57) {
+        //         hasNum = true;
+        //     }
+        // }
 
         if (hasAlpha && hasNum) {
             return [true, ""];
