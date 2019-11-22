@@ -17,25 +17,33 @@
             <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
-            <!--
+            {{#if loggedIn}}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    Dropdown
+                    Quick Access
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Start Workout</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">Exercises</a>
+                    <a class="dropdown-item" href="#">Routines</a>
+                    <a class="dropdown-item" href="#">Stats</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Settings</a>
                 </div>
             </li>
-            -->
+            {{/if}}
         </ul>
         {{#if loggedIn}}
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item profile-link">
+                <a class="btn nav-link navbar-brand" href="/profile">{{user.username}}</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link navbar-brand profile-link" href="/profile">{{user.username}}</a>
+                <a class="btn btn-secondary btn-navbar" href='/logout'>
+                    Logout
+                </a>
             </li>
         </ul>
         {{else}}

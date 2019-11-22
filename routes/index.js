@@ -24,9 +24,14 @@ router.post('/login', (req, res, next) => {
         if (!user) return res.redirect('/stop');
         req.logIn(user, (err) => {
             if (err) return next(err);
-            return res.redirect('/profile');
+            return res.redirect('/');
         });
     })(req, res, next);
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect(302, '/');
 });
 
 router.post('/register', (req, res) => {
@@ -40,9 +45,9 @@ router.post('/register', (req, res) => {
         return;
     }
 
-    // Check to make sure that email isn't already in use
+    // Check to make sure that email isn't already in use.
 
-    // TODO: verify the email is real by sending an email to it
+    // TODO: verify the email is real by sending an email to it.
 
     // Salt and hash the password.
     bcrypt.genSalt(10, (err, salt) => {
@@ -70,10 +75,10 @@ router.post('/register', (req, res) => {
 /********** Helper Functions **********/
 function checkAllValidators(username, email, emailConf, pswd, pswdConf) {
 
-    if (username.length < 3) return false;
-    if (email != emailConf) return false;
-    if (!Validators.validateEmail(email)) return false;
-    if (pswd != pswdConf) return false;
+    if (username.length < 3)                return false;
+    if (email != emailConf)                 return false;
+    if (!Validators.validateEmail(email))   return false;
+    if (pswd != pswdConf)                   return false;
     if (!Validators.validatePassword(pswd)) return false;
 
     return true;

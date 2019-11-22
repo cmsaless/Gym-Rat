@@ -68,15 +68,16 @@ footer {
     height: 15rem;
 }
 
-.div-settings-panel {
-    width: 50%;
-}
 
 .div-settings-panel button {
     margin-top: 0.5rem;
 }
 
 .profile-link {
+    text-align: center;
+}
+
+.profile-link a {
     color: white !important;
 }
 
