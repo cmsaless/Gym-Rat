@@ -68,7 +68,6 @@ footer {
     height: 15rem;
 }
 
-
 .div-settings-panel button {
     margin-top: 0.5rem;
 }
@@ -79,6 +78,7 @@ footer {
 
 .profile-link a {
     color: white !important;
+    font-size: 1.2rem !important;
 }
 
 .profile-link:hover {
