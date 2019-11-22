@@ -1,19 +1,38 @@
 <div class='container'>
     <div class='row align-items-center'>
-        <div class='col col-md-10'>
+        <div class='col col-md-12'>
             <h1>
                 {{#if user.isAdmin}}
                 <span title='Admin' style='cursor: default'>⭐</span>
                 {{/if}} {{{user.username}}}
             </h1>
         </div>
-        <div class='row justify-content-center'>
-            <div class='col col-md-2'>
-                <button id='btn-settings' class='btn btn-warning'>Settings</button>
-            </div>
-        </div>
+    </div>
+    <div class='row'>
         <div class='col col-md-12'>
             <hr />
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col col-md-12 div-btn-panel'>
+            <button class='btn btn-warning btn-profile'>Start Workout</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col col-md-4 div-btn-panel'>
+            <button class='btn btn-primary btn-profile'>Exercises</button>
+        </div>
+        <div class='col col-md-4 div-btn-panel'>
+            <button class='btn btn-info btn-profile'>Routines</button>
+        </div>
+        <div class='col col-md-4 div-btn-panel'>
+            <button class='btn btn-success btn-profile'>Stats</button>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col col-md-12'>
+            <hr />
+            ⚙️<a href='#' id='link-settings'>Settings</a>
         </div>
     </div>
 </div>

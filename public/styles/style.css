@@ -27,10 +27,6 @@ footer {
     padding-bottom: 2.5rem;
 }
 
-#btn-settings {
-    margin: auto;
-}
-
 .register-info {
     color: #495057
 }
@@ -48,6 +44,17 @@ footer {
 
 .btn-navbar {
     margin-left: 0.3rem;
+}
+
+.btn-profile {
+    height: 80%;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 3rem;
+}
+
+.div-btn-panel {
+    height: 15rem;
 }
 
 .profile-link {
