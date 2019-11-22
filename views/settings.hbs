@@ -12,7 +12,7 @@
             <form action='/changeEmail' method='post'>
                 <div class="form-group div-settings-panel">
                     <input name='email' class="form-control"placeholder="Email">
-                    <button class='btn btn-primary'>Update</button>
+                    <input type='submit' class='btn btn-primary' value='Update'></input>
                 </div>
             </form>
 
@@ -22,7 +22,7 @@
             <form action='/changeUsername' method='post'>
                 <div class="form-group div-settings-panel">
                     <input name='username' class="form-control" placeholder="Username">
-                    <button class='btn btn-primary'>Update</button>
+                    <input type='submit' class='btn btn-primary' value='Update'></input>
                 </div>
             </form>
 
@@ -34,7 +34,7 @@
                     <input name='password' class="form-control" placeholder="Password">
                     <input name='passwordConfirm' class="form-control" id='input-confirm' placeholder="Confirm Password">
                     <small id='passwordLabel' class="form-text text-muted">Passwords must be at least 8 characters long.</small>
-                    <button class='btn btn-primary'>Update</button>
+                    <input type='submit' class='btn btn-primary' value='Update'></input>
                 </div>
             </form>
             
@@ -43,12 +43,18 @@
                 <hr />
 
                 <h4>Delete all exercise and workout data</h4>
-                <button class='btn btn-danger'>Delete data</button>
+                <button type="button" class="btn btn-danger btn-navbar" data-toggle="modal" data-target="#deleteDataModal">
+                    Delete Data
+                </button>
+                {{> deleteDataModal}}
 
                 <hr />
 
                 <h4>Delete account</h4>
-                <button class='btn btn-danger'>Delete account</button>
+                <button type="button" class="btn btn-danger btn-navbar" data-toggle="modal" data-target="#deleteUserModal">
+                    Delete Account
+                </button>
+                {{> deleteUserModal}}
             </div>
 
         </div>
