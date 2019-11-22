@@ -11,7 +11,7 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    if (res.locals.logged_in) {
+    if (res.locals.loggedIn) {
         res.render('dashboard');
     } else {
         res.render('index');

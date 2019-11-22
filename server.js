@@ -112,7 +112,7 @@ app.set('views', __dirname + '/views');
 // });
 
 app.use((req, res, next) => {
-    res.locals.logged_in = req.user != null;
+    res.locals.loggedIn = req.user != null;
     res.locals.user = req.user || null;
     next();
 });

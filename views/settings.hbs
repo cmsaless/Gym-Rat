@@ -1,0 +1,56 @@
+<div class='container'>
+    <div class='row'>
+        <div class='col-md-12'>
+            <h1>Profile settings</h1>
+            <hr />
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-md-12'>
+
+            <h4>Change email</h4>
+            <form action='/changeEmail' method='post'>
+                <div class="form-group div-settings-panel">
+                    <input name='email' class="form-control"placeholder="Email">
+                    <button class='btn btn-primary'>Update</button>
+                </div>
+            </form>
+
+            <hr />
+
+            <h4>Change username</h4>
+            <form action='/changeUsername' method='post'>
+                <div class="form-group div-settings-panel">
+                    <input name='username' class="form-control" placeholder="Username">
+                    <button class='btn btn-primary'>Update</button>
+                </div>
+            </form>
+
+            <hr />
+
+            <h4>Change password</h4>
+            <form action='/changePassword' method='post'>
+                <div class="form-group div-settings-panel">
+                    <input name='password' class="form-control" placeholder="Password">
+                    <input name='passwordConfirm' class="form-control" id='input-confirm' placeholder="Confirm Password">
+                    <small id='passwordLabel' class="form-text text-muted">Passwords must be at least 8 characters long.</small>
+                    <button class='btn btn-primary'>Update</button>
+                </div>
+            </form>
+            
+            <div id='danger-zone'>
+                <h2 style='color: red'>Danger zone!</h2>
+                <hr />
+
+                <h4>Delete all exercise and workout data</h4>
+                <button class='btn btn-danger'>Delete data</button>
+
+                <hr />
+
+                <h4>Delete account</h4>
+                <button class='btn btn-danger'>Delete account</button>
+            </div>
+
+        </div>
+    </div>
+</div>

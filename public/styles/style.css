@@ -23,8 +23,19 @@ footer {
     min-height: 100vh;
 }
 
+#input-confirm {
+    margin-top: 0.5rem;
+}
+
 #content {
     padding-bottom: 2.5rem;
+}
+
+#danger-zone {
+    border-style: dashed;
+    border-width: 1px;
+    border-color: red;
+    padding: 2rem;
 }
 
 .register-info {
@@ -55,6 +66,14 @@ footer {
 
 .div-btn-panel {
     height: 15rem;
+}
+
+.div-settings-panel {
+    width: 50%;
+}
+
+.div-settings-panel button {
+    margin-top: 0.5rem;
 }
 
 .profile-link {

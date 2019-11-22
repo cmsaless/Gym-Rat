@@ -11,7 +11,11 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('profile', { user: req.user });
+    res.render('profile');
+});
+
+router.get('/settings', (req, res) => {
+    res.render('settings')
 });
 
 module.exports = router;
