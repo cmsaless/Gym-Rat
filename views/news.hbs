@@ -3,7 +3,7 @@
         <div class='col col-md-8 page-title' id='col-main-content'>
             <h1>What's new?</h1>
             {{#if user.isAdmin}}
-            <button class='btn btn-success-outline'>Add</button>
+            <button class='btn btn-outline-success' id='btn-add'>Add</button>
             {{/if}}
             <hr />
             <h3>November 2019</h3>
@@ -37,3 +37,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#btn-add').click(() => {
+        window.location.href = "/news/add";
+    });
+</script>
