@@ -1,4 +1,5 @@
 const express = require('express');
+const Update = require('../models/Update')
 
 const router = express.Router();
 
@@ -12,8 +13,8 @@ router.get('/', (req, res) => {
 
 router.get('/add', (req, res) => {
 
-    if (!req.isAuthenticated() || req.user == null || !req.user.isAdmin) {
-        res.render('denied');
+    if (!req.isAuthenticated() || !req.user.isAdmin) {
+        res.render('denied', { message: 'You are not authorized to access this page.' });
         return;
     }
 
@@ -21,10 +22,25 @@ router.get('/add', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-    console.log(req.body.title);
-    console.log(req.body.subtitle);
-    console.log(req.body.description);
-    console.log(req.body.banner);
+
+    if (!req.isAuthenticated() || !req.user.isAdmin) {
+        res.render('denied', { message: 'You are not authorized to post to this endpoint.' });
+        return;
+    }
+
+    const newUpdate = new Update({
+        title: req.body.title,
+        subtitle: req.body.subtitle,
+        description: req.body.description,
+        author: req.user.username,
+        banner: req.body.banner,
+    });
+
+    newUpdate.save().then(savedUpdate => {
+        res.redirect(302, '/news');
+    }).catch(err => {
+        console.log(err);
+    })
 });
 
 module.exports = router;
