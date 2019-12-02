@@ -56,6 +56,10 @@ footer {
     margin-left: 0.3rem;
 }
 
+.navbar-brand:hover {
+    color: rgba(255,255,255,.5) !important;
+}
+
 .btn-profile {
     height: 80%;
     width: 100%;
