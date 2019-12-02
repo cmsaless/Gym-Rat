@@ -7,6 +7,24 @@ router.all('/*', (req, res, next) => {
     next();
 });
 
+/*
+
+When the user goes to the news page, they should see all the updates for the current month.
+There should be a link/button at the bottom that, when clicked, displays all updates in a table
+such as:
+
+|  #  |     Date    |       Title       |  Subtitle  |    Description   |
+=========================================================================
+|  3  |  12/2/2019  |  Newest feature!  |     yes    |  blah blah blah  | 
+|  2  |  11/27/2019 |  Newer feature!   |     yep    |  blah blah blah  | 
+|  1  |  8/3/2018   |  New feauture!    |     yea    |  blah blah blah  | 
+
+If there are too many updates, divide them by pages. Display about 10-20 a page?
+
+Each entry in the table should be a link to the full details of the update.
+
+*/
+
 router.get('/', (req, res) => {
     let todaysDate = new Date();
     let month = getMonthName(todaysDate.getMonth());
