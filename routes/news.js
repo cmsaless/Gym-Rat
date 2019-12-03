@@ -32,7 +32,8 @@ router.get('/', (req, res) => {
     let year = todaysDate.getFullYear();
 
     Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
-        array.sort((a, b) => b.createdAt - a.createdAt)
+        array.sort((a, b) => b.createdAt - a.createdAt);
+        array.forEach((element) => element.description = shortenDescription(element.description));
         res.render('news', { month: strMonth, year: year, updates: array });
     });
 });
@@ -72,6 +73,20 @@ router.post('/add', (req, res) => {
 });
 
 /********** Helper Functions **********/
+function shortenDescription(description) {
+
+    const maxLength = 500;
+
+    if (description.length < maxLength) {
+        return description;
+    }
+
+    let shortDescription = description.substring(0, maxLength - 3);
+    shortDescription += "...";
+
+    return shortDescription;
+}
+
 function getMonthName(num) {
     let month = "";
     switch (num) {
