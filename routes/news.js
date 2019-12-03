@@ -30,11 +30,9 @@ router.get('/', (req, res) => {
     let strMonth = getMonthName(todaysDate.getMonth());
     let year = todaysDate.getFullYear();
 
-    let thisMonthsUpdates = Update.find({ month: todaysDate.getMonth() })
-
-    console.log(thisMonthsUpdates.length)
-
-    res.render('news', { month: strMonth, year: year, updates: thisMonthsUpdates });
+    let thisMonthsUpdates = Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
+        res.render('news', { month: strMonth, year: year, updates: array });
+    });
 });
 
 router.get('/add', (req, res) => {
