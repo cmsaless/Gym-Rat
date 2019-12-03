@@ -27,9 +27,14 @@ Each entry in the table should be a link to the full details of the update.
 
 router.get('/', (req, res) => {
     let todaysDate = new Date();
-    let month = getMonthName(todaysDate.getMonth());
+    let strMonth = getMonthName(todaysDate.getMonth());
     let year = todaysDate.getFullYear();
-    res.render('news', { month: month, year: year });
+
+    let thisMonthsUpdates = Update.find({ month: todaysDate.getMonth() })
+
+    console.log(thisMonthsUpdates.length)
+
+    res.render('news', { month: strMonth, year: year, updates: thisMonthsUpdates });
 });
 
 router.get('/add', (req, res) => {
@@ -95,7 +100,7 @@ function getMonthName(num) {
         case 8:
             month = "September";
             break;
-        case 9: 
+        case 9:
             month = "October";
             break;
         case 10:

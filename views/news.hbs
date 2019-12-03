@@ -6,37 +6,19 @@
             <button class='btn btn-outline-success' id='btn-add'>Add</button>
             {{/if}}
             <hr />
-            <h3>{{{month}}} {{{year}}}</h3>
+            <h3>{{month}} {{year}}</h3>
+            {{#each updates}}
             <div class='update-box'>
-                <h2>Title for this update</h2>
-                <h5>Subtitle for this update with a bit more text</h5>
-                <span><i>November 19, 2019 (1:42PM)</i></span>
+                <h2>{{title}}</h2>
+                <h5>{{subtitle}}</h5>
+                <span><i>{{createdAt}}</i></span>
                 <br />
                 <br />
                 <p>Description for this update that blah blah blah blah blah blah blah blah blah blah blah blah blah
                     blah
                     blah blah blah blah blah blah blah...</p>
             </div>
-            <div class='update-box'>
-                <h2>Title for this update</h2>
-                <h5>Subtitle for this update with a bit more text</h5>
-                <span><i>November 19, 2019 (1:42PM)</i></span>
-                <br />
-                <br />
-                <p>Description for this update that blah blah blah blah blah blah blah blah blah blah blah blah blah
-                    blah
-                    blah blah blah blah blah blah blah...</p>
-            </div>
-            <div class='update-box'>
-                <h2>Title for this update</h2>
-                <h5>Subtitle for this update with a bit more text</h5>
-                <span><i>November 19, 2019 (1:42PM)</i></span>
-                <br />
-                <br />
-                <p>Description for this update that blah blah blah blah blah blah blah blah blah blah blah blah blah
-                    blah
-                    blah blah blah blah blah blah blah...</p>
-            </div>
+            {{/each}}
         </div>
     </div>
 </div>
