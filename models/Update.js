@@ -21,7 +21,7 @@ const UpdateSchema = new Schema({
         required: true
     },
     createdAt: {
-        type: String,
+        type: Date,
         default: new Date(),
         required: true,
     },

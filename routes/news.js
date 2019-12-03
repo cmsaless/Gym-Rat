@@ -26,11 +26,13 @@ Each entry in the table should be a link to the full details of the update.
 */
 
 router.get('/', (req, res) => {
+
     let todaysDate = new Date();
     let strMonth = getMonthName(todaysDate.getMonth());
     let year = todaysDate.getFullYear();
 
     Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
+        array.sort((a, b) => b.createdAt - a.createdAt)
         res.render('news', { month: strMonth, year: year, updates: array });
     });
 });
@@ -57,6 +59,8 @@ router.post('/add', (req, res) => {
         subtitle: req.body.subtitle,
         description: req.body.description,
         author: req.user.username,
+        createdAt: new Date(),
+        month: new Date().getMonth(),
         banner: req.body.banner,
     });
 
