@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
     let strMonth = getMonthName(todaysDate.getMonth());
     let year = todaysDate.getFullYear();
 
-    let thisMonthsUpdates = Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
+    Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
         res.render('news', { month: strMonth, year: year, updates: array });
     });
 });
