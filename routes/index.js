@@ -75,10 +75,10 @@ router.post('/register', (req, res) => {
 /********** Helper Functions **********/
 function checkAllValidators(username, email, emailConf, pswd, pswdConf) {
 
-    if (username.length < 3)                return false;
-    if (email != emailConf)                 return false;
-    if (!Validators.validateEmail(email))   return false;
-    if (pswd != pswdConf)                   return false;
+    if (username.length < 3) return false;
+    if (email != emailConf) return false;
+    if (!Validators.validateEmail(email)) return false;
+    if (pswd != pswdConf) return false;
     if (!Validators.validatePassword(pswd)) return false;
 
     return true;

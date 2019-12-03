@@ -54,6 +54,11 @@ footer {
 
 .btn-navbar {
     margin-left: 0.3rem;
+    color: white !important;
+}
+
+.btn-navbar:hover {
+    cursor: pointer;
 }
 
 .navbar-brand:hover {
@@ -88,13 +93,8 @@ footer {
     color: lightblue !important;
 }
 
-.btn-col-login {
-    width: 10rem;
-}
-
 .p-frontpage-info {
     margin: auto;
-    width: 35rem;
     text-align: center;
 }
 
@@ -107,6 +107,14 @@ footer {
     width: 10rem;
     height: 5rem;
     font-size: 2rem;
+}
+
+.link-update-box {
+    color: black;
+}
+
+.link-update-box:hover {
+    text-decoration: none;
 }
 
 .update-box {

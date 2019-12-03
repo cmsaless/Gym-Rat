@@ -5,18 +5,19 @@
             {{#if user.isAdmin}}
             <button class='btn btn-outline-success' id='btn-add'>Add</button>
             {{/if}}
-            <hr />
             <h3>{{month}} {{year}}</h3>
             <hr />
             {{#each updates}}
-            <div class='update-box'>
-                <h2>{{title}}</h2>
-                <h5>{{subtitle}}</h5>
-                <span><i>{{createdAt}}</i></span>
-                <br />
-                <br />
-                <p>{{description}}</p>
-            </div>
+            <a class='link-update-box' href="/news/{{_id}}">
+                <div class='update-box'>
+                    <h2>{{title}}</h2>
+                    <h5>{{subtitle}}</h5>
+                    <span><i>{{createdAt}}</i></span>
+                    <br />
+                    <br />
+                    <p>{{description}}</p>
+                </div>
+            </a>
             {{else}}
             <h3>No updates yet! Stay tuned!</h3>
             {{/each}}

@@ -75,7 +75,7 @@ router.post('/add', (req, res) => {
 /********** Helper Functions **********/
 function shortenDescription(description) {
 
-    const maxLength = 500;
+    const maxLength = 300;
 
     if (description.length < maxLength) {
         return description;
