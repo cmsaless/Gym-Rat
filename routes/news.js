@@ -52,7 +52,7 @@ router.get('/all', (req, res) => {
         array.forEach((update) => {
             let date = new Date(update.createdAt);
             update.createdAt = formatDate(date);
-            update.description = shortenDescription(update.description, 50);
+            update.description = shortenDescription(update.description, 75);
         });
         array.sort((a, b) => b.createdAt - a.createdAt);
         res.render('newsAll', { updates: array })
@@ -107,7 +107,7 @@ function formatDate(date) {
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0' + minutes : minutes;
     let strTime = hours + ':' + minutes + ' ' + ampm;
-    return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+    return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
 }
 
 function shortenDescription(description, maxLength) {
