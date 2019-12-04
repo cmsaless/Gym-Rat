@@ -21,8 +21,8 @@ const UpdateSchema = new Schema({
         required: true
     },
     createdAt: {
-        type: Date,
-        default: new Date(),
+        type: String,
+        default: new Date().toString(),
         required: true,
     },
     month: {

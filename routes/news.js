@@ -32,11 +32,32 @@ router.get('/', (req, res) => {
     let year = todaysDate.getFullYear();
 
     Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
+        array.forEach((update) => {
+            let date = new Date(update.createdAt);
+            update.createdAt = formatDate(date);
+            update.description = shortenDescription(update.description, 300);
+        });
         array.sort((a, b) => b.createdAt - a.createdAt);
-        array.forEach((element) => element.description = shortenDescription(element.description));
         res.render('news', { month: strMonth, year: year, updates: array });
     });
 });
+
+router.get('/all', (req, res) => {
+
+    // If the user doesn't put any limit on the number of updates, set the DB limit to 0.
+    // When 0, the DB will just grab all the documents.
+    let count = req.query.count == null ? 0 : parseInt(req.query.count);
+
+    Update.find().limit(count).exec((err, array) => {
+        array.forEach((update) => {
+            let date = new Date(update.createdAt);
+            update.createdAt = formatDate(date);
+            update.description = shortenDescription(update.description, 50);
+        });
+        array.sort((a, b) => b.createdAt - a.createdAt);
+        res.render('newsAll', { updates: array })
+    });
+})
 
 router.get('/add', (req, res) => {
 
@@ -45,7 +66,7 @@ router.get('/add', (req, res) => {
         return;
     }
 
-    res.render('addUpdate');
+    res.render('newsAdd');
 });
 
 router.post('/add', (req, res) => {
@@ -60,8 +81,9 @@ router.post('/add', (req, res) => {
         subtitle: req.body.subtitle,
         description: req.body.description,
         author: req.user.username,
-        createdAt: new Date(),
-        month: new Date().getMonth(),
+        createdAt: new Date().toString(),
+        // month might be neccessary anymore? use caution
+        month: new Date().getMonth().toString(),
         banner: req.body.banner,
     });
 
@@ -73,9 +95,22 @@ router.post('/add', (req, res) => {
 });
 
 /********** Helper Functions **********/
-function shortenDescription(description) {
 
-    const maxLength = 300;
+// NOTE: I'm going to want to move getMonthName and formatDate to a shared middleware directory
+// so other routes can use them.
+
+function formatDate(date) {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    let strTime = hours + ':' + minutes + ' ' + ampm;
+    return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+}
+
+function shortenDescription(description, maxLength) {
 
     if (description.length < maxLength) {
         return description;
@@ -88,46 +123,11 @@ function shortenDescription(description) {
 }
 
 function getMonthName(num) {
-    let month = "";
-    switch (num) {
-        case 0:
-            month = "January";
-            break;
-        case 1:
-            month = "February"
-            break;
-        case 2:
-            month = "March";
-            break;
-        case 3:
-            month = "April"
-            break;
-        case 4:
-            month = "May";
-            break;
-        case 5:
-            month = "June";
-            break;
-        case 6:
-            month = "July";
-            break;
-        case 7:
-            month = "August";
-            break;
-        case 8:
-            month = "September";
-            break;
-        case 9:
-            month = "October";
-            break;
-        case 10:
-            month = "November";
-            break;
-        case 11:
-            month = "December";
-            break;
-    }
-    return month;
+    let months = ["January", "February", "March", "April",
+        "May", "June", "July", "August",
+        "September", "October", "November", "December"];
+
+    return months[num];
 }
 /********** End Helper Functions **********/
 
