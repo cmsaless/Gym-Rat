@@ -1,5 +1,6 @@
 const express = require('express');
 const Update = require('../models/Update')
+const ObjectId = require('mongodb').ObjectId;
 
 const router = express.Router();
 
@@ -42,6 +43,17 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/view/:id', (req, res) => {
+
+    Update.findOne(ObjectId(req.params.id), (err, update) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.render('newsView', { update: update });
+    });
+});
+
 router.get('/all', (req, res) => {
 
     // If the user doesn't put any limit on the number of updates, set the DB limit to 0.
@@ -52,6 +64,7 @@ router.get('/all', (req, res) => {
         let updateViews = [];
         array.forEach((update) => {
             let updateViewModel = {
+                id: update._id,
                 formattedDate: formatDate(update.createdAt),
                 title: update.title,
                 shortenedDescription: shortenDescription(update.description, 75)
