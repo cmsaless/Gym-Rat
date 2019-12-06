@@ -32,12 +32,12 @@ router.get('/', (req, res) => {
     let year = todaysDate.getFullYear();
 
     Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
+        array.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         array.forEach((update) => {
             let date = new Date(update.createdAt);
             update.createdAt = formatDate(date);
             update.description = shortenDescription(update.description, 300);
         });
-        array.sort((a, b) => b.createdAt - a.createdAt);
         res.render('news', { month: strMonth, year: year, updates: array });
     });
 });
@@ -49,12 +49,12 @@ router.get('/all', (req, res) => {
     let count = req.query.count == null ? 0 : parseInt(req.query.count);
 
     Update.find().limit(count).exec((err, array) => {
+        array.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         array.forEach((update) => {
             let date = new Date(update.createdAt);
             update.createdAt = formatDate(date);
             update.description = shortenDescription(update.description, 75);
         });
-        array.sort((a, b) => b.createdAt - a.createdAt);
         res.render('newsAll', { updates: array })
     });
 })
