@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/settings', (req, res) => {
-    res.render('settings')
+    res.render('profileSettings')
 });
 
 router.post('/deleteUser', (req, res) => {

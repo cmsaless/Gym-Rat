@@ -46,16 +46,20 @@ router.get('/all', (req, res) => {
 
     // If the user doesn't put any limit on the number of updates, set the DB limit to 0.
     // When 0, the DB will just grab all the documents.
-    let count = req.query.count == null ? 0 : parseInt(req.query.count);
+    let count = req.query.limit == null ? 0 : parseInt(req.query.limit);
 
-    Update.find().limit(count).exec((err, array) => {
-        array.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    Update.find().sort({ createdAt: -1 }).limit(count).exec((err, array) => {
+        let updateViews = [];
         array.forEach((update) => {
-            let date = new Date(update.createdAt);
-            update.createdAt = formatDate(date);
-            update.description = shortenDescription(update.description, 75);
+            let updateViewModel = {
+                formattedDate: formatDate(update.createdAt),
+                title: update.title,
+                shortenedDescription: shortenDescription(update.description, 75)
+            };
+            updateViews.push(updateViewModel);
         });
-        res.render('newsAll', { updates: array })
+        let countStr = req.query.limit == null ? "All" : count;
+        res.render('newsAll', { limit: countStr, updates: updateViews })
     });
 })
 
@@ -81,7 +85,7 @@ router.post('/add', (req, res) => {
         subtitle: req.body.subtitle,
         description: req.body.description,
         author: req.user.username,
-        createdAt: new Date().toString(),
+        createdAt: new Date(),
         // month might be neccessary anymore? use caution
         month: new Date().getMonth().toString(),
         banner: req.body.banner,

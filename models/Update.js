@@ -21,12 +21,12 @@ const UpdateSchema = new Schema({
         required: true
     },
     createdAt: {
-        type: String,
-        default: new Date().toString(),
+        type: Date,
+        default: new Date(),
         required: true,
     },
     month: {
-        type: String,
+        type: Number,
         default: new Date().getMonth(),
         required: true
     },

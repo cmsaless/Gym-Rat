@@ -80,6 +80,10 @@ footer {
     margin-top: 0.5rem;
 }
 
+.dropdown-limit {
+    margin-bottom: 2em;
+}
+
 .profile-link {
     text-align: center;
 }
