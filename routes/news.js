@@ -50,7 +50,7 @@ router.get('/view/:id', (req, res) => {
             console.log(err);
             return;
         }
-        res.render('newsView', { update: update });
+        res.render('newsView', { user: req.user, update: update });
     });
 });
 
