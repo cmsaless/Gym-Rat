@@ -25,6 +25,14 @@ const UpdateSchema = new Schema({
         default: new Date(),
         required: true,
     },
+    modifiedBy: {
+        type: String,
+        required: false
+    },
+    modifiedOn: {
+        type: Date,
+        required: false
+    },
     month: {
         type: Number,
         default: new Date().getMonth(),

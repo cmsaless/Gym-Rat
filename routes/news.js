@@ -111,6 +111,41 @@ router.post('/add', (req, res) => {
     })
 });
 
+router.get('/edit/:id', (req, res) => {
+
+    if (!req.isAuthenticated() || !req.user.isAdmin) {
+        res.render('denied', { message: 'You are not authorized to access this page.' });
+        return;
+    }
+
+
+    Update.findOne(ObjectId(req.params.id), (err, update) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.render('newsEdit', { update: update });
+    });
+});
+
+router.post('/edit/:id', (req, res) => {
+
+    if (!req.isAuthenticated() || !req.user.isAdmin) {
+        res.render('denied', { message: 'You are not authorized to post to this endpoint.' });
+        return;
+    }
+
+});
+
+router.post('/delete/:id', (req, res) => {
+
+    if (!req.isAuthenticated() || !req.user.isAdmin) {
+        res.render('denied', { message: 'You are not authorized to post to this endpoint.' });
+        return;
+    }
+
+});
+
 /********** Helper Functions **********/
 
 // NOTE: I'm going to want to move getMonthName and formatDate to a shared middleware directory
