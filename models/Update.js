@@ -21,9 +21,22 @@ const UpdateSchema = new Schema({
         required: true
     },
     createdAt: {
-        type: String,
+        type: Date,
         default: new Date(),
         required: true,
+    },
+    modifiedBy: {
+        type: String,
+        required: false
+    },
+    modifiedOn: {
+        type: Date,
+        required: false
+    },
+    month: {
+        type: Number,
+        default: new Date().getMonth(),
+        required: true
     },
     banner: {
         type: String

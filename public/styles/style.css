@@ -54,6 +54,15 @@ footer {
 
 .btn-navbar {
     margin-left: 0.3rem;
+    color: white !important;
+}
+
+.btn-navbar:hover {
+    cursor: pointer;
+}
+
+.navbar-brand:hover {
+    color: rgba(255,255,255,.5) !important;
 }
 
 .btn-profile {
@@ -71,6 +80,10 @@ footer {
     margin-top: 0.5rem;
 }
 
+.dropdown-limit {
+    margin-bottom: 2em;
+}
+
 .profile-link {
     text-align: center;
 }
@@ -84,13 +97,8 @@ footer {
     color: lightblue !important;
 }
 
-.btn-col-login {
-    width: 10rem;
-}
-
 .p-frontpage-info {
     margin: auto;
-    width: 35rem;
     text-align: center;
 }
 
@@ -103,6 +111,14 @@ footer {
     width: 10rem;
     height: 5rem;
     font-size: 2rem;
+}
+
+.link-update-box {
+    color: black;
+}
+
+.link-update-box:hover {
+    text-decoration: none;
 }
 
 .update-box {
@@ -118,6 +134,10 @@ footer {
     border-color: lightblue;
     background-color: lightblue;
     color: white;
+}
+
+.modal-backdrop {
+    z-index: 1020;
 }
 
 @media screen and (max-width: 767px) {
@@ -148,8 +168,4 @@ footer {
         width: 100%;
         font-size: 1.5rem;
     }
-}
-
-.modal-backdrop {
-    z-index: 1020;
 }

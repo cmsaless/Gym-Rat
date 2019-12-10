@@ -11,7 +11,7 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    if (res.locals.loggedIn) {
+    if (req.isAuthenticated()) {
         res.render('dashboard');
     } else {
         res.render('index');
@@ -45,7 +45,7 @@ router.post('/register', (req, res) => {
         return;
     }
 
-    // Check to make sure that email isn't already in use.
+    // TODO: check to make sure that email isn't already in use.
 
     // TODO: verify the email is real by sending an email to it.
 
@@ -69,16 +69,16 @@ router.post('/register', (req, res) => {
         });
     });
 
-    // TODO: Send a 'please verify' email to confirm user owns this
+    // TODO: send a 'please verify' email to confirm user owns the email
 });
 
 /********** Helper Functions **********/
 function checkAllValidators(username, email, emailConf, pswd, pswdConf) {
 
-    if (username.length < 3)                return false;
-    if (email != emailConf)                 return false;
-    if (!Validators.validateEmail(email))   return false;
-    if (pswd != pswdConf)                   return false;
+    if (username.length < 3) return false;
+    if (email != emailConf) return false;
+    if (!Validators.validateEmail(email)) return false;
+    if (pswd != pswdConf) return false;
     if (!Validators.validatePassword(pswd)) return false;
 
     return true;

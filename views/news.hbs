@@ -3,37 +3,36 @@
         <div class='col col-md-8 page-title' id='col-main-content'>
             <h1>What's new?</h1>
             {{#if user.isAdmin}}
-            <button class='btn btn-success'>Add</button>
+            <button class='btn btn-outline-success' id='btn-add'>Add</button>
             {{/if}}
+            <h3>{{month}} {{year}}</h3>
             <hr />
-            <h3>November 2019</h3>
-            <div class='update-box'>
-                <h2>Title for this update</h2>
-                <h5>Subtitle for this update with a bit more text</h5>
-                <span><i>November 19, 2019 (1:42PM)</i></span>
-                <br />
-                <br />
-                <p>Description for this update that blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-                    blah blah blah blah blah blah blah...</p>
-            </div>
-            <div class='update-box'>
-                <h2>Title for this update</h2>
-                <h5>Subtitle for this update with a bit more text</h5>
-                <span><i>November 19, 2019 (1:42PM)</i></span>
-                <br />
-                <br />
-                <p>Description for this update that blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-                    blah blah blah blah blah blah blah...</p>
-            </div>
-            <div class='update-box'>
-                <h2>Title for this update</h2>
-                <h5>Subtitle for this update with a bit more text</h5>
-                <span><i>November 19, 2019 (1:42PM)</i></span>
-                <br />
-                <br />
-                <p>Description for this update that blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-                    blah blah blah blah blah blah blah...</p>
-            </div>
+            {{#each updates}}
+            <a class='link-update-box' href="/news/view/{{_id}}">
+                <div class='update-box'>
+                    <h2>{{title}}</h2>
+                    <h5>{{subtitle}}</h5>
+                    <span><i>{{createdAt}}</i></span>
+                    <br />
+                    <br />
+                    <p>{{description}}</p>
+                </div>
+            </a>
+            {{else}}
+            <h3>No updates yet! Stay tuned!</h3>
+            {{/each}}
+            <br />
+            <a href='/news/all?limit=20'>See all updates</a>
         </div>
     </div>
 </div>
+
+<script>
+    $('#btn-add').click(() => {
+        window.location.href = "/news/add";
+    });
+
+    $('.update-box').click(() => {
+        window.location.href = "#";
+    });
+</script>
