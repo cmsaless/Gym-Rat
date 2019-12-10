@@ -10,8 +10,10 @@
             </div>
             <p><i>This photo has yet to be taken because I'm lazy!</i></p>
             <p>
-                So let's talk. This is a website meant for people who want a light-weight exercise tracking web app that doesn't bundle a
-                bunch of social media junk. Let's just be honest: no one wants to be going around sharing with their friends
+                So let's talk. This is a website meant for people who want a light-weight exercise tracking web app that
+                doesn't bundle a
+                bunch of social media junk. Let's just be honest: no one wants to be going around sharing with their
+                friends
                 and coworkers how much they weigh or how often we all don't actually exercise.
             </p>
             <!--
@@ -24,7 +26,19 @@
             -->
         </div>
         <div class='col-md-4' id='col-newsfeed'>
-            {{> newsFeed}}
+            <h1>What's new?</h1>
+            <h4>Check out the new features!</h4>
+            <br />
+            {{#each updates}}
+            <h5>{{title}}</h5>
+            <span><i>{{formattedDate}}</i></span>
+            <br />
+            <span>{{shortenedDescription}} <br /> <i>By: {{author}}</i></span>
+            <br />
+            <a href='/news/view/{{id}}'>Read more</a>
+            <br />
+            <br />
+            {{/each}}
         </div>
     </div>
 </div>

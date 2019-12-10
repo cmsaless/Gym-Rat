@@ -1,4 +1,5 @@
 const express = require('express');
+const utils = require('../middleware/utils');
 const Update = require('../models/Update')
 const ObjectId = require('mongodb').ObjectId;
 
@@ -29,15 +30,15 @@ Each entry in the table should be a link to the full details of the update.
 router.get('/', (req, res) => {
 
     let todaysDate = new Date();
-    let strMonth = getMonthName(todaysDate.getMonth());
+    let strMonth = utils.getMonthName(todaysDate.getMonth());
     let year = todaysDate.getFullYear();
 
     Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
         array.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         array.forEach((update) => {
             let date = new Date(update.createdAt);
-            update.createdAt = formatDate(date);
-            update.description = shortenDescription(update.description, 300);
+            update.createdAt = utils.formatDate(date);
+            update.description = utils.shortenDescription(update.description, 300);
         });
         res.render('news', { month: strMonth, year: year, updates: array });
     });
@@ -65,9 +66,9 @@ router.get('/all', (req, res) => {
         array.forEach((update) => {
             let updateViewModel = {
                 id: update._id,
-                formattedDate: formatDate(update.createdAt),
+                formattedDate: utils.formatDate(update.createdAt),
                 title: update.title,
-                shortenedDescription: shortenDescription(update.description, 75)
+                shortenedDescription: utils.shortenDescription(update.description, 75)
             };
             updateViews.push(updateViewModel);
         });
@@ -166,36 +167,7 @@ router.post('/delete/:id', (req, res) => {
 // NOTE: I'm going to want to move getMonthName and formatDate to a shared middleware directory
 // so other routes can use them.
 
-function formatDate(date) {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    let strTime = hours + ':' + minutes + ' ' + ampm;
-    return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
-}
 
-function shortenDescription(description, maxLength) {
-
-    if (description.length < maxLength) {
-        return description;
-    }
-
-    let shortDescription = description.substring(0, maxLength - 3);
-    shortDescription += "...";
-
-    return shortDescription;
-}
-
-function getMonthName(num) {
-    let months = ["January", "February", "March", "April",
-        "May", "June", "July", "August",
-        "September", "October", "November", "December"];
-
-    return months[num];
-}
 /********** End Helper Functions **********/
 
 module.exports = router;

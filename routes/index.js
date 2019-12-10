@@ -1,6 +1,8 @@
 const express = require('express');
 const User = require('../models/User');
+const Update = require('../models/Update');
 const Validators = require('../public/functions/validators.js');
+const utils = require('../middleware/utils');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
@@ -12,7 +14,24 @@ router.all('/*', (req, res, next) => {
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('dashboard');
+
+        // Get the 3 most recent updates (regardless if they match the month or not) and
+        // display them on the dashboard.
+
+        Update.find().sort({ createdAt: -1 }).limit(3).exec((err, array) => {
+            let updateViews = [];
+            array.forEach((update) => {
+                let updateViewModel = {
+                    id: update._id,
+                    formattedDate: utils.formatDate(update.createdAt),
+                    title: update.title,
+                    shortenedDescription: utils.shortenDescription(update.description, 75),
+                    author: update.author
+                };
+                updateViews.push(updateViewModel);
+            });
+            res.render('dashboard', { updates: updateViews });
+        });
     } else {
         res.render('index');
     }
