@@ -30,7 +30,7 @@ Each entry in the table should be a link to the full details of the update.
 router.get('/', (req, res) => {
 
     let todaysDate = new Date();
-    let strMonth = utils.getMonthName(todaysDate.getMonth());
+    let strMonth = getMonthName(todaysDate.getMonth());
     let year = todaysDate.getFullYear();
 
     Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
@@ -163,11 +163,13 @@ router.post('/delete/:id', (req, res) => {
 });
 
 /********** Helper Functions **********/
+function getMonthName(num) {
+    let months = ["January", "February", "March", "April",
+        "May", "June", "July", "August", "September",
+        "October", "November", "December"];
 
-// NOTE: I'm going to want to move getMonthName and formatDate to a shared middleware directory
-// so other routes can use them.
-
-
+    return months[num];
+}
 /********** End Helper Functions **********/
 
 module.exports = router;

@@ -23,30 +23,21 @@ footer {
     min-height: 100vh;
 }
 
-#input-confirm {
-    margin-top: 0.5rem;
-}
-
 #content {
     padding-bottom: 2.5rem;
 }
 
-#danger-zone {
-    border-style: dashed;
-    border-width: 1px;
-    border-color: red;
-    padding: 2rem;
-}
-
-.register-info {
+/* .register-info {
     color: #495057
-}
+} */
 
+/* temp */
 .fakeimg-sm {
     height: 200px;
     background: #aaa;
 }
 
+/* temp */
 .fakeimg-lg {
     height: 300px;
     background: #aaa;
@@ -65,26 +56,12 @@ footer {
     color: rgba(255,255,255,.5) !important;
 }
 
-.btn-profile {
-    height: 80%;
-    width: 100%;
-    margin-top: 1rem;
-    font-size: 3rem;
-}
-
-.div-btn-panel {
-    height: 15rem;
-}
-
-.div-settings-panel .btn {
-    margin-top: 0.5rem;
-}
-
+/* move to news.css */
 .dropdown-limit {
     margin-bottom: 2em;
 }
 
-.profile-link {
+/* .profile-link {
     text-align: center;
 }
 
@@ -95,32 +72,38 @@ footer {
 
 .profile-link:hover {
     color: lightblue !important;
-}
+} */
 
+/* move to index.css */
 .p-frontpage-info {
     margin: auto;
     text-align: center;
 }
 
+/* index.css */
 .page-title {
     text-align: center;
     margin: auto;
 }
 
+/* index.css */
 .btn-col-login {
     width: 10rem;
     height: 5rem;
     font-size: 2rem;
 }
 
+/* move to news.css */
 .link-update-box {
     color: black;
 }
 
+/* move to news.css */
 .link-update-box:hover {
     text-decoration: none;
 }
 
+/* move to news.css */
 .update-box {
     border: 1px solid black;
     text-align: left;
@@ -130,6 +113,7 @@ footer {
     cursor: pointer;
 }
 
+/* move to news.css */
 .update-box:hover {
     border-color: lightblue;
     background-color: lightblue;

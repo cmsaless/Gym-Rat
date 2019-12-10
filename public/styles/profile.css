@@ -1,0 +1,25 @@
+#input-confirm {
+    margin-top: 0.5rem;
+}
+
+#danger-zone {
+    border-style: dashed;
+    border-width: 1px;
+    border-color: red;
+    padding: 2rem;
+}
+
+.btn-profile {
+    height: 80%;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 3rem;
+}
+
+.div-btn-panel {
+    height: 15rem;
+}
+
+.div-settings-panel .btn {
+    margin-top: 0.5rem;
+}
