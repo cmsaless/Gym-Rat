@@ -21,10 +21,19 @@ footer {
 #page-container {
     position: relative;
     min-height: 100vh;
+    margin-top: 4rem;
 }
 
 #content {
     padding-bottom: 2.5rem;
+}
+
+#banner {
+    margin-bottom: 2rem;
+}
+
+.news-feed-inner {
+    margin-top: 1.5rem;
 }
 
 /* .register-info {
@@ -76,7 +85,7 @@ footer {
 
 /* move to index.css */
 .p-frontpage-info {
-    margin: auto;
+    margin-top: 2rem;
     text-align: center;
 }
 

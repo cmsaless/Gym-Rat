@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Need this to avoid deprecation warning.
+mongoose.set('useFindAndModify', false);
+
 const UpdateSchema = new Schema({
     title: {
         type: String,

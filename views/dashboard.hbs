@@ -4,7 +4,6 @@
             <h1>Welcome back to Gym Rat 🐀,</h1>
             <h1>{{user.username}}!</h1>
             <h5>But what is Gym Rat?</h5>
-            <br />
             <div class='fakeimg-lg'>
                 Fake image
             </div>
@@ -28,16 +27,19 @@
         <div class='col-md-4' id='col-newsfeed'>
             <h1>What's new?</h1>
             <h4>Check out the new features!</h4>
-            <br />
             {{#each updates}}
-            <h5>{{title}}</h5>
-            <span><i>{{formattedDate}}</i></span>
-            <br />
-            <span>{{shortenedDescription}} <br /> <i>By: {{author}}</i></span>
-            <br />
-            <a href='/news/view/{{id}}'>Read more</a>
-            <br />
-            <br />
+            <div class='news-feed-inner'>
+                <h5>{{title}}</h5>
+                <span>
+                    <i>{{formattedDate}}</i>
+                    <br />
+                    <i>By: {{author}}</i>
+                    <br />
+                    {{shortenedDescription}}
+                    <br />
+                </span>
+                <a href='/news/view/{{id}}' class='link-read-more'>Read more</a>
+            </div>
             {{/each}}
         </div>
     </div>
