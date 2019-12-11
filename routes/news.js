@@ -135,21 +135,23 @@ router.post('/edit/:id', (req, res) => {
         return;
     }
 
-    Update.updateOne({ _id: req.params.id },
+    console.log(req.body.description);
+
+    Update.findOneAndUpdate({ _id: req.params.id },
         {
-            title: req.title,
-            subtitle: req.subtitle,
-            description: req.description,
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+            description: req.body.description,
             modifiedBy: req.user.username,
             modifiedAt: new Date()
-        }, (err, raw) => {
+        }, 
+        { new: true },
+        (err, doc) => {
             if (err) {
                 console.log(err);
                 return;
             }
-            Update.findOne(ObjectId(req.params.id), (err, update) => {
-                res.render('newsView', { user: req.user, update: update });
-            });
+            res.render('newsView', { user: req.user, update: doc });
         });
 });
 
