@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../models/User');
 
 const router = express.Router();
 
@@ -16,6 +17,22 @@ router.get('/', (req, res) => {
 
 router.get('/settings', (req, res) => {
     res.render('profileSettings')
+});
+
+router.post('/changeEmail', (req, res) => {
+    User.findOneAndUpdate({_id : req.user._id},
+        {
+            email: req.body.email
+        },
+        {new: true},
+        (err, doc) => {
+            if (err) {
+                console.log(err);
+            }
+            return done(null, false, {
+                message: "Your email has been changed!"
+            });
+        });
 });
 
 router.post('/deleteUser', (req, res) => {
