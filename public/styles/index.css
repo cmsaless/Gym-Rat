@@ -5,13 +5,13 @@
 }
 
 /* index.css */
-.page-title {
+.col-md-12 {
     text-align: center;
     margin: auto;
 }
 
 /* index.css */
-.btn-col-login {
+.btn-col {
     width: 10rem;
     height: 5rem;
     font-size: 2rem;

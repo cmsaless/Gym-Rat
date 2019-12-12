@@ -1,5 +1,5 @@
 .p-update-description {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 #div-see-all {
@@ -36,4 +36,9 @@
 /* move to news.css */
 .dropdown-limit {
     margin-bottom: 2em;
+}
+
+.col-md-8 {
+    text-align: center;
+    margin: auto;
 }

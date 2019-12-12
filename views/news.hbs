@@ -1,6 +1,8 @@
+<link rel="stylesheet" href="/styles/news.css" />
+
 <div class='container'>
     <div class='row'>
-        <div class='col col-md-8 page-title' id='col-main-content'>
+        <div class='col col-md-8' id='col-main-content'>
             <h1>What's new?</h1>
             {{#if user.isAdmin}}
             <button class='btn btn-outline-success' id='btn-add'>Add</button>
@@ -8,12 +10,12 @@
             <h3>{{month}} {{year}}</h3>
             <hr />
             {{#each updates}}
-            <a class='link-update-box' href="/news/view/{{_id}}">
+            <a class='link-update-box' href="/news/view/{{id}}">
                 <div class='update-box'>
                     <h2>{{title}}</h2>
                     <h5>{{subtitle}}</h5>
-                    <span><i>{{createdAt}}</i></span>
-                    <p class='p-update-description'>{{description}}</p>
+                    <span><i>{{formattedDate}}<br />{{author}}</i></span>
+                    <p class='p-update-description'>{{shortenedDescription}}</p>
                 </div>
             </a>
             {{else}}

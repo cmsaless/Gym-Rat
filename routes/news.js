@@ -35,12 +35,20 @@ router.get('/', (req, res) => {
 
     Update.find({ month: todaysDate.getMonth() }).exec((err, array) => {
         array.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        let updateViews = [];
         array.forEach((update) => {
             let date = new Date(update.createdAt);
-            update.createdAt = utils.formatDate(date);
-            update.description = utils.shortenDescription(update.description, 300);
+            let updateViewModel = {
+                id: update._id,
+                title: update.title,
+                subtitle: update.subtitle,
+                formattedDate : utils.formatDate(date),
+                author: update.author,
+                shortenedDescription: utils.shortenDescription(update.description, 300)
+            };
+            updateViews.push(updateViewModel);
         });
-        res.render('news', { month: strMonth, year: year, updates: array });
+        res.render('news', { month: strMonth, year: year, updates: updateViews });
     });
 });
 
