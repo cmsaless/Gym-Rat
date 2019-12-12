@@ -1,0 +1,18 @@
+/* move to index.css */
+.p-frontpage-info {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/* index.css */
+.page-title {
+    text-align: center;
+    margin: auto;
+}
+
+/* index.css */
+.btn-col-login {
+    width: 10rem;
+    height: 5rem;
+    font-size: 2rem;
+}

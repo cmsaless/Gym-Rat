@@ -36,10 +36,6 @@ footer {
     margin-top: 1.5rem;
 }
 
-/* .register-info {
-    color: #495057
-} */
-
 /* temp */
 .fakeimg-sm {
     height: 200px;
@@ -63,70 +59,6 @@ footer {
 
 .navbar-brand:hover {
     color: rgba(255,255,255,.5) !important;
-}
-
-/* move to news.css */
-.dropdown-limit {
-    margin-bottom: 2em;
-}
-
-/* .profile-link {
-    text-align: center;
-}
-
-.profile-link a {
-    color: white !important;
-    font-size: 1.2rem !important;
-}
-
-.profile-link:hover {
-    color: lightblue !important;
-} */
-
-/* move to index.css */
-.p-frontpage-info {
-    margin-top: 2rem;
-    text-align: center;
-}
-
-/* index.css */
-.page-title {
-    text-align: center;
-    margin: auto;
-}
-
-/* index.css */
-.btn-col-login {
-    width: 10rem;
-    height: 5rem;
-    font-size: 2rem;
-}
-
-/* move to news.css */
-.link-update-box {
-    color: black;
-}
-
-/* move to news.css */
-.link-update-box:hover {
-    text-decoration: none;
-}
-
-/* move to news.css */
-.update-box {
-    border: 1px solid black;
-    text-align: left;
-    margin-top: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
-    cursor: pointer;
-}
-
-/* move to news.css */
-.update-box:hover {
-    border-color: lightblue;
-    background-color: lightblue;
-    color: white;
 }
 
 .modal-backdrop {
