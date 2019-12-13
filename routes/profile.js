@@ -30,10 +30,8 @@ router.post('/changeEmail', (req, res) => {
                 console.log(err);
             }
             console.log("ye");
-            req.flash("message", "Email changed");
-            // return done(null, false, {
-            //     message: "Your email has been changed!"
-            // });
+            req.flash("successMessage", "Email changed");
+            res.redirect('/profile/settings');
         });
 });
 
