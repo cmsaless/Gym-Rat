@@ -13,6 +13,7 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
+    
     if (req.isAuthenticated()) {
 
         // Get the 3 most recent updates (regardless if they match the month or not) and
