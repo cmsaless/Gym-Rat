@@ -1,4 +1,4 @@
-module.exports = {
+var Utils = {
     formatDate: function (date) {
         let hours = date.getHours();
         let minutes = date.getMinutes();
@@ -21,3 +21,5 @@ module.exports = {
         return shortDescription;
     }
 };
+
+module.exports = Utils;
