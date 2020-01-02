@@ -76,25 +76,25 @@ router.post('/changePassword', (req, res) => {
     // 3. bcrypt it
     // 4. pass into DB
 
-    let isValid = 3 < req.body.username.length;
+    // let isValid = 3 < req.body.username.length;
 
     if (isValid) {
-        User.findOneAndUpdate({ _id: req.user._id },
-            {
-                username: req.body.username
-            },
-            { new: true },
-            (err, doc) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                req.flash("successMessage", "Your username was changed to: " + doc.username);
-                res.redirect("/profile/settings");
-            });
+        // User.findOneAndUpdate({ _id: req.user._id },
+        //     {
+        //         username: req.body.username
+        //     },
+        //     { new: true },
+        //     (err, doc) => {
+        //         if (err) {
+        //             console.log(err);
+        //             return;
+        //         }
+        //         req.flash("successMessage", "Your username was changed to: " + doc.username);
+        //         res.redirect("/profile/settings");
+        //     });
     } else {
-        req.flash("errorMessage", "The new username you entered is not valid");
-        res.redirect("/profile/settings");
+        // req.flash("errorMessage", "The new username you entered is not valid");
+        // res.redirect("/profile/settings");
     }
 });
 
