@@ -31,12 +31,13 @@
             <hr />
 
             <h4>Change password</h4>
-            <form action='/profile/changePassword' method='post'>
+            <form id='changePasswordForm' action='/profile/changePassword' method='post'>
                 <div class="form-group div-settings-panel">
-                    <input name='password' class="form-control" placeholder="Password">
-                    <input name='passwordConfirm' class="form-control" id='change-password-confirm' placeholder="Confirm Password">
+                    <input name='password' type='password' class="form-control" id='change-password' placeholder="Password">
+                    <input name='passwordConfirm' type='password' class="form-control" id='change-password-confirm' placeholder="Confirm Password">
                     <small id='passwordLabel' class="form-text text-muted">Passwords must be at least 8 characters long.</small>
-                    <input type='submit' class='btn btn-primary' value='Update'></input>
+                    {{!-- <input type='submit' class='btn btn-primary' value='Update'></input> --}}
+                    <button class='btn btn-primary' onclick='changePasswordCheck()'></button>
                 </div>
             </form>
 
@@ -64,3 +65,22 @@
         </div>
     </div>
 </div>
+
+<script src="/middleware/validators.js" />
+<script>
+function changePasswordCheck() {
+
+    let newPswd = $('#change-password').val();
+    let newPswdConf = $('#change-password-confirm').val();
+
+    if (newPswd != newPswdConf) {
+        $('#passwordLabel').text('The passwords do not match!');
+        $('#passwordLabel').css('color', 'red');
+    } else if (!validatePassword(newPswd)) {
+        $('#passwordLabel').text('The password you entered is not valid!');
+        $('#passwordLabel').css('color', 'red');
+    } else {
+        $('#changePasswordForm').submit();
+    }
+}
+</script>

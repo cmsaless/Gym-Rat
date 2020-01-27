@@ -82,7 +82,10 @@ router.post('/register', (req, res) => {
 
             // Submit new User model to DB.
             newUser.save().then(savedUser => {
-                res.redirect(302, '/');
+                // res.redirect(302, '/');
+                passport.authenticate('local')(req, res, function () {
+                    res.redirect(302, '/');
+                })
             }).catch(err => {
                 console.log("failed: ", err);
             });
