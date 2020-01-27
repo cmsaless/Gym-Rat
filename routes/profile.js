@@ -2,6 +2,7 @@ const express = require('express');
 const Validators = require("../middleware/validators");
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+var ObjectId = require('mongodb').ObjectID;
 
 const router = express.Router();
 
@@ -107,7 +108,19 @@ router.post('/changePassword', (req, res) => {
 
 router.post('/deleteUser', (req, res) => {
 
-    // Delete everything to do with this user's workout data.
+    // TODO: Delete all user data first
+
+    console.log(req.user._id);
+    console.log(req.user);
+
+    try {
+        User.deleteOne({ "_id": ObjectId(req.user._id) }, (err, res) => {
+            if (err) console.log(err);
+            console.log(res);
+        });
+    } catch (e) {
+        console.log(e);
+    }
 
     res.redirect(302, '/');
 });
