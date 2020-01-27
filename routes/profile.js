@@ -1,5 +1,6 @@
 const express = require('express');
 const Validators = require("../middleware/validators");
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 const router = express.Router();
@@ -50,6 +51,7 @@ router.post('/changeUsername', (req, res) => {
     let isValid = 3 < req.body.username.length;
 
     if (isValid) {
+
         User.findOneAndUpdate({ _id: req.user._id },
             {
                 username: req.body.username
@@ -78,21 +80,25 @@ router.post('/changePassword', (req, res) => {
 
     let matches = req.body.password == req.body.passwordConfirm
     let isValid = Validators.validatePassword(req.body.password);
-    
+
     if (isValid) {
-        User.findOneAndUpdate({ _id: req.user._id },
-            {
-                password: req.body.password
-            },
-            { new: true },
-            (err, doc) => {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                req.flash("successMessage", "Your password was successfully changed!");
-                res.redirect("/profile/settings");
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(req.body.password, salt, (err, hash) => {
+                User.findOneAndUpdate({ _id: req.user._id },
+                    {
+                        password: hash
+                    },
+                    { new: true },
+                    (err, doc) => {
+                        if (err) {
+                            console.log(err);
+                            return;
+                        }
+                        req.flash("successMessage", "Your password was successfully changed!");
+                        res.redirect("/profile/settings");
+                    });
             });
+        });
     } else {
         req.flash("errorMessage", "The new password you entered is not valid");
         res.redirect("/profile/settings");
@@ -103,14 +109,12 @@ router.post('/deleteUser', (req, res) => {
 
     // Delete everything to do with this user's workout data.
 
-
     res.redirect(302, '/');
 });
 
 router.post('/deleteData', (req, res) => {
 
     // Delete everything to do with this user.
-
 
     res.redirect(302, '/');
 });

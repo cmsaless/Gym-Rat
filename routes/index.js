@@ -39,9 +39,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/login', (req, res, next) => {
-    passport.authenticate('local', function (err, user, info) {
+    passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
-        if (!user) return res.redirect('/stop');
+        if (!user) return res.redirect('/stop?notFound=true');
         req.logIn(user, (err) => {
             if (err) return next(err);
             return res.redirect('/');
@@ -82,7 +82,6 @@ router.post('/register', (req, res) => {
 
             // Submit new User model to DB.
             newUser.save().then(savedUser => {
-                // res.redirect(302, '/');
                 passport.authenticate('local')(req, res, function () {
                     res.redirect(302, '/');
                 })

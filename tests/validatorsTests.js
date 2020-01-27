@@ -1,7 +1,7 @@
 const assert = require('assert');
-const Validators = require('../public/functions/validators.js');
+const Validators = require('../public/js/validators.js');
 
-describe('/public/functions/validators.js', () => {
+describe('/public/js/validators.js', () => {
     describe('validatePassword', () => {
         it('should return false; too short', () => {
             let pswd = 'abc1234';
@@ -13,15 +13,15 @@ describe('/public/functions/validators.js', () => {
             let tuple = Validators.validatePassword(pswd)
             assert.equal(false, tuple[0]);
         });
-        it('should return false; not valid', () => {
+        it('should return true; is valid', () => {
             let pswd = 'abcdefghijk';
             let tuple = Validators.validatePassword(pswd)
-            assert.equal(false, tuple[0]);
+            assert.equal(true, tuple[0]);
         });
-        it('should return false; not valid', () => {
+        it('should return true; is valid', () => {
             let pswd = '12345678';
             let tuple = Validators.validatePassword(pswd)
-            assert.equal(false, tuple[0]);
+            assert.equal(true, tuple[0]);
         });
         it('should return true; is valid', () => {
             let pswd = 'abc12345';
