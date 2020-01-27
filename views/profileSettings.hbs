@@ -36,8 +36,8 @@
                     <input name='password' type='password' class="form-control" id='change-password' placeholder="Password">
                     <input name='passwordConfirm' type='password' class="form-control" id='change-password-confirm' placeholder="Confirm Password">
                     <small id='passwordLabel' class="form-text text-muted">Passwords must be at least 8 characters long.</small>
-                    <span id='passwordSpan'>Yes</span>
                     {{!-- <input type='submit' class='btn btn-primary' value='Update'></input> --}}
+                    <div id='passwordError'></div>
                     <button class='btn btn-primary' type='button' onclick='changePasswordCheck()'>Update</button>
                 </div>
             </form>
@@ -71,20 +71,18 @@
 <script>
     function changePasswordCheck() {
 
-        console.log("clicked");
-
         let newPswd = $('#change-password').val();
         let newPswdConf = $('#change-password-confirm').val();
 
         if (newPswd != newPswdConf) {
-            $('#passwordSpan').text('The passwords do not match!');
-            $('#passwordSpan').css('color', 'red');
+            $('#passwordError').text('The passwords do not match!');
+            $('#passwordError').css('color', 'red');
             return;
         }
         
         if (!Validators.validatePassword(newPswd)[0]) {
-            $('#passwordSpan').text('The password you entered is not valid!');
-            $('#passwordSpan').css('color', 'red');
+            $('#passwordError').text('The password you entered is not valid!');
+            $('#passwordError').css('color', 'red');
             return;
         }
             
