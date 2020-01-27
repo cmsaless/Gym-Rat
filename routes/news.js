@@ -143,8 +143,6 @@ router.post('/edit/:id', (req, res) => {
         return;
     }
 
-    console.log(req.body.description);
-
     Update.findOneAndUpdate({ _id: req.params.id },
         {
             title: req.body.title,

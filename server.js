@@ -103,17 +103,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Telling the server what directory the view files are located in.
 app.set('views', __dirname + '/views');
 
-// app.use((req, res, next) => {
-//     if (req.user) {
-//         console.log(req.user);
-//         res.locals.user = req.user;
-//     }
-//     next();
-// });
-
 app.use((req, res, next) => {
+    // this one can be removed
     res.locals.loggedIn = req.user != null;
     res.locals.user = req.user || null;
+    res.locals.successMessage = req.flash('successMessage');
+    res.locals.errorMessage = req.flash('errorMessage');
     next();
 });
 

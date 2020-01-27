@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../models/User');
 const Update = require('../models/Update');
-const Validators = require('../public/functions/validators.js');
+const Validators = require('../middleware/validators.js');
 const utils = require('../middleware/utils');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
@@ -13,6 +13,7 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
+    
     if (req.isAuthenticated()) {
 
         // Get the 3 most recent updates (regardless if they match the month or not) and
@@ -38,9 +39,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/login', (req, res, next) => {
-    passport.authenticate('local', function (err, user, info) {
+    passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
-        if (!user) return res.redirect('/stop');
+        if (!user) return res.redirect('/stop?notFound=true');
         req.logIn(user, (err) => {
             if (err) return next(err);
             return res.redirect('/');
@@ -81,7 +82,9 @@ router.post('/register', (req, res) => {
 
             // Submit new User model to DB.
             newUser.save().then(savedUser => {
-                res.redirect(302, '/');
+                passport.authenticate('local')(req, res, function () {
+                    res.redirect(302, '/');
+                })
             }).catch(err => {
                 console.log("failed: ", err);
             });
