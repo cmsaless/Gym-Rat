@@ -11,17 +11,20 @@
         <div class='col-md-12'>
 
             <h4>Change email</h4>
-            <form action='/profile/changeEmail' method='post'>
+            <form id='changeEmailForm' action='/profile/changeEmail' method='post' autocomplete="off">
                 <div class="form-group div-settings-panel">
-                    <input name='email' class="form-control" placeholder="Email">
-                    <input type='submit' class='btn btn-primary' value='Update'></input>
+                    <input name='password' type='password' class="form-control" id='current-password' placeholder="Current Password">
+                    <input name='email' id='change-email' class="form-control" placeholder="Email">
+                    <input name='emailConfirm' id='change-emailConf' class='form-control' placeholder="Confirm Email">
+                    <div id='emailError'></div>
+                    <button class='btn btn-primary' type='button' onclick='changeEmailCheck()'>Update</input>
                 </div>
             </form>
 
             <hr />
 
             <h4>Change username</h4>
-            <form id='changeUsernameForm' action='/profile/changeUsername' method='post'>
+            <form id='changeUsernameForm' action='/profile/changeUsername' method='post' autocomplete="off">
                 <div class="form-group div-settings-panel">
                     <input name='username' class="form-control" placeholder="Username" id='change-username'>
                     <small id='usernameLabel' class="form-text text-muted">Usernames must be at least 3 characters long and cannot contain '@'.</small>
@@ -33,10 +36,11 @@
             <hr />
 
             <h4>Change password</h4>
-            <form id='changePasswordForm' action='/profile/changePassword' method='post'>
+            <form id='changePasswordForm' action='/profile/changePassword' method='post' autocomplete="off">
                 <div class="form-group div-settings-panel">
-                    <input name='password' type='password' class="form-control" id='change-password' placeholder="Password">
-                    <input name='passwordConfirm' type='password' class="form-control" id='change-password-confirm' placeholder="Confirm Password">
+                    <input name='currentPassword' type='password' class="form-control" id='current-password' placeholder="Current Password">
+                    <input name='newPassword' type='password' class="form-control" id='change-password' placeholder="New Password">
+                    <input name='newPasswordConfirm' type='password' class="form-control" id='change-password-confirm' placeholder="Confirm New Password">
                     <small id='passwordLabel' class="form-text text-muted">Passwords must be at least 8 characters long.</small>
                     <div id='passwordError'></div>
                     <button class='btn btn-primary' type='button' onclick='changePasswordCheck()'>Update</button>
@@ -70,14 +74,29 @@
 
 <script src="/js/validators.js"></script>
 <script>
+    function changeEmailCheck() {
+
+        let newEmail = $('#change-email').val();
+        let newEmailConf = $('#change-emailConf').val();
+        let isValid = newEmail.indexOf('@') != -1 && newEmail == newEmailConf;
+
+        if (!isValid) {
+            $('#emailError').css('color', 'red');
+            $('#emailError').text('Not a valid email!');
+            return
+        }
+
+        $('#changeEmailForm').submit();
+    }
+
     function changeUsernameCheck() {
 
         let newUsername = $('#change-username').val(); 
         let isValid = 2 < newUsername.length && newUsername.indexOf('@') == -1;
 
         if (!isValid) {
-            $('#usernameError').text('Not a valid username!')
             $('#usernameError').css('color', 'red');
+            $('#usernameError').text('Not a valid username!')
             return;
         }
 
@@ -90,14 +109,14 @@
         let newPswdConf = $('#change-password-confirm').val();
 
         if (newPswd != newPswdConf) {
-            $('#passwordError').text('The passwords do not match!');
             $('#passwordError').css('color', 'red');
+            $('#passwordError').text('The passwords do not match!');
             return;
         }
         
         if (!Validators.validatePassword(newPswd)[0]) {
-            $('#passwordError').text('The password you entered is not valid!');
             $('#passwordError').css('color', 'red');
+            $('#passwordError').text('The password you entered is not valid!');
             return;
         }
             

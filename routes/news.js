@@ -59,7 +59,17 @@ router.get('/view/:id', (req, res) => {
             console.log(err);
             return;
         }
-        res.render('newsView', { user: req.user, update: update });
+
+        let updateViewModel = {
+            id: update._id,
+            title: update.title,
+            subtitle: update.subtitle,
+            description: update.description,
+            author: update.author,
+            createdAt: utils.formatDate(update.createdAt)
+        };
+
+        res.render('newsView', { user: req.user, update: updateViewModel });
     });
 });
 

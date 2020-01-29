@@ -5,6 +5,7 @@ const Validators = require('../middleware/validators.js');
 const utils = require('../middleware/utils');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const sanitize = require('mongo-sanitize');
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    
+
     if (req.isAuthenticated()) {
 
         // Get the 3 most recent updates (regardless if they match the month or not) and
@@ -41,10 +42,13 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
-        if (!user) return res.redirect('/stop?notFound=true');
+        if (!user) {
+            req.flash('errorMessage', 'Your email/password combination was not found.')
+            return res.redirect(302, '/');
+        }
         req.logIn(user, (err) => {
             if (err) return next(err);
-            return res.redirect('/');
+            return res.redirect(302, '/');
         });
     })(req, res, next);
 });
@@ -56,42 +60,64 @@ router.get('/logout', (req, res) => {
 
 router.post('/register', (req, res) => {
 
+    // Sanitize our inputs.
+    let username = sanitize(req.body.username);
+    let email = sanitize(req.body.email);
+    let emailConfirm = sanitize(req.body.emailConfirm);
+    let password = sanitize(req.body.password);
+    let passwordConfirm = sanitize(req.body.passwordConfirm);
+
     // Ensure everything is there and valid.
-    let allValid = checkAllValidators(req.body.username,
-        req.body.email, req.body.emailConfirm,
-        req.body.password, req.body.passwordConfirm);
+    let allValid = checkAllValidators(
+        username,
+        password,
+        passwordConfirm,
+        email,
+        emailConfirm
+    );
 
     if (!allValid) {
+        req.flash("errorMessage", "Invalid input!");
+        res.redirect(302, '/');
         return;
     }
 
-    // TODO: check to make sure that email isn't already in use.
+    // Check if that email is already in the DB (an account exists).
+    User.findOne({ email: req.body.email }).then((err, res) => {
+        if (err) return;
+        if (res) {
+            req.flash("errorMessage", "An account with that email already exists!");
+            res.redirect(302, '/');
+            return;
+        }
+    })
 
     // TODO: verify the email is real by sending an email to it.
 
     // Salt and hash the password.
     bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(req.body.password, salt, (err, hash) => {
+        if (err) return;
+        bcrypt.hash(password, salt, (err, hash) => {
+
+            if (err) return;
 
             // Create a new User model object.
             const newUser = new User({
-                username: req.body.username,
-                email: req.body.email.toLowerCase(),
+                username: username,
+                email: email.toLowerCase(),
                 password: hash
             });
 
             // Submit new User model to DB.
             newUser.save().then(savedUser => {
-                passport.authenticate('local')(req, res, function () {
+                passport.authenticate('local')(req, res, () => {
                     res.redirect(302, '/');
                 })
             }).catch(err => {
-                console.log("failed: ", err);
+                return;
             });
         });
     });
-
-    // TODO: send a 'please verify' email to confirm user owns the email
 });
 
 /********** Helper Functions **********/

@@ -24,6 +24,10 @@
     margin-top: 0.5rem;
 }
 
-#change-password-confirm {
+/* #change-password-confirm {
+    margin-top: 0.5rem;
+} */
+
+.form-control {
     margin-top: 0.5rem;
 }
