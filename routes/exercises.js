@@ -6,8 +6,6 @@ const sanitize = require('mongo-sanitize');
 
 const router = express.Router();
 
-let ObjectId = require('mongodb').ObjectID;
-
 router.all('/*', (req, res, next) => {
     if (!req.user) {
         res.redirect('/');
@@ -37,6 +35,7 @@ router.post('/add', (req, res) => {
         }
     );
 
+    // res.render()
 });
 
 module.exports = router;

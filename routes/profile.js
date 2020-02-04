@@ -6,8 +6,6 @@ const sanitize = require('mongo-sanitize');
 
 const router = express.Router();
 
-let ObjectId = require('mongodb').ObjectID;
-
 router.all('/*', (req, res, next) => {
     if (!req.user) {
         res.redirect('/');
@@ -146,8 +144,6 @@ router.post('/changePassword', async (req, res) => {
 
 router.post('/deleteUser', (req, res) => {
 
-    // TODO: Delete all user data first
-
     User.deleteOne({ _id: req.user._id }, (err, res) => {
         if (err) return;
     });
@@ -157,7 +153,7 @@ router.post('/deleteUser', (req, res) => {
 
 router.post('/deleteData', (req, res) => {
 
-    // Delete everything to do with this user.
+    // TODO: Delete everything to do with this user.
 
     res.redirect(302, '/');
 });
