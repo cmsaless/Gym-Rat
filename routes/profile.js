@@ -56,7 +56,6 @@ router.post('/changeEmail', async (req, res) => {
         {
             email: req.body.email
         },
-        { new: true },
         (err, doc) => {
             if (err) {
                 console.log(err);
@@ -139,7 +138,6 @@ router.post('/changePassword', async (req, res) => {
                 });
         });
     });
-    // });
 });
 
 router.post('/deleteUser', (req, res) => {
@@ -163,7 +161,7 @@ router.post('/deleteData', (req, res) => {
 /********** Helper Functions **********/
 async function verifyPasswordIsCorrect(plainTextPassword, hashedPassword) {
     bcrypt.compare(plainTextPassword, hashedPassword, (err, result) => {
-        if (err) return false;
+        if (err) return;
         return result;
     });
 }
