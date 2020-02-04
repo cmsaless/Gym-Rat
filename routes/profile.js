@@ -148,7 +148,7 @@ router.post('/deleteUser', (req, res) => {
 
     // TODO: Delete all user data first
 
-    User.deleteOne({ "_id": ObjectId(req.user._id) }, (err, res) => {
+    User.deleteOne({ _id: req.user._id }, (err, res) => {
         if (err) return;
     });
 

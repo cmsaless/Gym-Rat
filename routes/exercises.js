@@ -6,6 +6,8 @@ const sanitize = require('mongo-sanitize');
 
 const router = express.Router();
 
+let ObjectId = require('mongodb').ObjectID;
+
 router.all('/*', (req, res, next) => {
     if (!req.user) {
         res.redirect('/');
@@ -24,7 +26,16 @@ router.post('/add', (req, res) => {
     let exerciseType = sanitize(req.body.type);
     let exerciseCategory = sanitize(req.body.category);
 
-    
+    let exerciseToInsert = { 'name': exerciseName, 'type': exerciseType, 'category': exerciseCategory }
+    User.updateOne({ _id: req.user._id },
+        {
+            $push: { exercises: exerciseToInsert }
+        },
+        (err, raw) => {
+            if (err) console.log(err);
+            else console.log(raw)
+        }
+    );
 
 });
 
