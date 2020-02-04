@@ -48,7 +48,7 @@ router.get('/', (req, res) => {
             };
             updateViews.push(updateViewModel);
         });
-        res.render('news', { month: strMonth, year: year, updates: updateViews });
+        res.render('news/news', { month: strMonth, year: year, updates: updateViews });
     });
 });
 

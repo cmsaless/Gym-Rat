@@ -70,10 +70,10 @@ router.post('/register', (req, res) => {
     // Ensure everything is there and valid.
     let allValid = checkAllValidators(
         username,
-        password,
-        passwordConfirm,
         email,
-        emailConfirm
+        emailConfirm,
+        password,
+        passwordConfirm
     );
 
     if (!allValid) {
@@ -83,7 +83,7 @@ router.post('/register', (req, res) => {
     }
 
     // Check if that email is already in the DB (an account exists).
-    User.findOne({ email: req.body.email }).then((err, res) => {
+    User.findOne({ email: email }).then((err, res) => {
         if (err) return;
         if (res) {
             req.flash("errorMessage", "An account with that email already exists!");
@@ -123,10 +123,10 @@ router.post('/register', (req, res) => {
 /********** Helper Functions **********/
 function checkAllValidators(username, email, emailConf, pswd, pswdConf) {
 
-    if (username.length < 3) return false;
-    if (email != emailConf) return false;
-    if (!Validators.validateEmail(email)) return false;
-    if (pswd != pswdConf) return false;
+    if (username.length < 3)                return false;
+    if (email != emailConf)                 return false;
+    if (!Validators.validateEmail(email))   return false;
+    if (pswd != pswdConf)                   return false;
     if (!Validators.validatePassword(pswd)) return false;
 
     return true;

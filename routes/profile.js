@@ -17,7 +17,7 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('profile.hbs');
+    res.render('profile/profile.hbs');
 });
 
 router.get('/settings', (req, res) => {
