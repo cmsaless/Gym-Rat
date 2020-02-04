@@ -69,7 +69,7 @@ router.get('/view/:id', (req, res) => {
             createdAt: utils.formatDate(update.createdAt)
         };
 
-        res.render('newsView', { user: req.user, update: updateViewModel });
+        res.render('news/newsView', { user: req.user, update: updateViewModel });
     });
 });
 
@@ -91,7 +91,7 @@ router.get('/all', (req, res) => {
             updateViews.push(updateViewModel);
         });
         let countStr = req.query.limit == null ? "All" : count;
-        res.render('newsAll', { limit: countStr, updates: updateViews })
+        res.render('news/newsAll', { limit: countStr, updates: updateViews })
     });
 })
 
@@ -142,7 +142,7 @@ router.get('/edit/:id', (req, res) => {
             console.log(err);
             return;
         }
-        res.render('newsEdit', { update: update });
+        res.render('news/newsEdit', { update: update });
     });
 });
 
@@ -167,7 +167,7 @@ router.post('/edit/:id', (req, res) => {
                 console.log(err);
                 return;
             }
-            res.render('newsView', { user: req.user, update: doc });
+            res.render('news/newsView', { user: req.user, update: doc });
         });
 });
 

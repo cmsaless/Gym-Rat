@@ -17,15 +17,15 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('profile');
+    res.render('profile.hbs');
 });
 
 router.get('/settings', (req, res) => {
-    res.render('profileSettings');
+    res.render('profile/profileSettings.hbs');
 });
 
 router.get('/exercises', (req, res) => {
-    res.render('profileExercises');
+    res.render('profile/profileExercises.hbs');
 });
 
 router.post('/changeEmail', async (req, res) => {
