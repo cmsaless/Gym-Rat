@@ -21,7 +21,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/settings', (req, res) => {
-    res.render('profileSettings')
+    res.render('profileSettings');
+});
+
+router.get('/exercises', (req, res) => {
+    res.render('profileExercises');
 });
 
 router.post('/changeEmail', async (req, res) => {
