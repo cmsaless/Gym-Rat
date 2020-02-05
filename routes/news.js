@@ -116,9 +116,10 @@ router.post('/add', (req, res) => {
         title: req.body.title,
         subtitle: req.body.subtitle,
         description: req.body.description,
+        // author should be really be author id in case author changes name
         author: req.user.username,
         createdAt: new Date(),
-        // month might be neccessary anymore? use caution
+        // month might not be neccessary anymore? use caution
         month: new Date().getMonth().toString(),
         banner: req.body.banner,
     });

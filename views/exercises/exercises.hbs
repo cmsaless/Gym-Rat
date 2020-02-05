@@ -24,11 +24,10 @@
                     Training
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/profile/exercises">All</a>
+                    <a class="dropdown-item" href="/exercises">All</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/profile/exercises?training=cardio">Cardio</a>
-                    <a class="dropdown-item" href="/profile/exercises?training=strength">Strength</a>
-                    {{!-- <a class="dropdown-item" href="/news/all">All</a> --}}
+                    <a class="dropdown-item" href="/exercises?training=cardio">Cardio</a>
+                    <a class="dropdown-item" href="/exercises?training=strength">Strength</a>
                 </div>
             </div>
 
@@ -46,8 +45,22 @@
                         <th scope='col'>Name</th>
                         <th scope='col'>Training</th>
                         <th scope='col'>Type</th>
+                        <th scope='col'></th>
                     </tr>
                 </thead>
+                <tbody>
+                    {{#each exercises}}
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{category}}</td>
+                        <td>{{type}}</td>
+                        <td>
+                            <button class='btn btn-warning'>Edit</button>
+                            <button class='btn btn-danger'>Delete</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
             </table>
 
         </div>
@@ -60,7 +73,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add Exercise</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-backdrop="static" data-toggle="modal" data-keyboard="false" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -78,14 +91,14 @@
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="category" id="category-strength"
-                            value="strength" checked>
+                            value="Strength" checked>
                         <label class="form-check-label" for="category-strength">
                             Strength
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="category" id="category-cardio"
-                            value="cardio">
+                            value="Cardio">
                         <label class="form-check-label" for="category-cardio">
                             Cardio
                         </label>
