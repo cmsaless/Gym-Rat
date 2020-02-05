@@ -61,6 +61,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
         if (err) return err;
+        // Need to change so hashed password isn't being sent in requests
         done(null, user);
     });
 });

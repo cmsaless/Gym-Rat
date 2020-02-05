@@ -51,12 +51,18 @@
                 <tbody>
                     {{#each exercises}}
                     <tr>
+                        <td>{{_id}}</td>
                         <td>{{name}}</td>
                         <td>{{category}}</td>
                         <td>{{type}}</td>
                         <td>
                             <button class='btn btn-warning'>Edit</button>
-                            <button class='btn btn-danger'>Delete</button>
+                            <form action='/exercises/delete' method='post'>
+                                <div class="form-group">
+                                    <input type='hidden' name='_id' value='{{_id}}'>
+                                </div>
+                                <button class='btn btn-danger' type='submit' value='Submit'>Delete</button>
+                            </form>
                         </td>
                     </tr>
                     {{/each}}
@@ -73,7 +79,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Add Exercise</h5>
-                <button type="button" class="close" data-backdrop="static" data-toggle="modal" data-keyboard="false" aria-label="Close">
+                <button type="button" class="close" data-backdrop="static" data-toggle="modal" data-keyboard="false"
+                    aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -111,3 +118,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    function deleteExercise(_id) {
+        console.log('posting');
+        $.ajax({
+            type: "POST",
+            url: './exercises/delete',
+            data: JSON.stringify({ _id: _id }),
+            contentType: "application/json"
+        });
+    }
+</script>

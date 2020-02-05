@@ -15,7 +15,7 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('exercises/exercises.hbs', {exercises : req.user.exercises.sort(compareExercises)});
+    res.render('exercises/exercises.hbs', { exercises: req.user.exercises.sort(compareExercises) });
 });
 
 router.post('/add', (req, res) => {
@@ -38,6 +38,10 @@ router.post('/add', (req, res) => {
 
 });
 
+router.post('/delete', (req, res) => {
+    console.log('hit');
+    console.log(req.body);
+})
 
 /********** Helper Functions **********/
 function compareExercises(a, b) {
