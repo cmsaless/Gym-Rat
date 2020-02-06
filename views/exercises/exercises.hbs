@@ -100,14 +100,14 @@
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="category" id="category-strength"
-                            value="Strength" checked='checked'>
+                            value="Strength">
                         <label class="form-check-label" for="category-strength">
                             Strength
                         </label>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="category" id="category-cardio"
-                            value="Cardio" checked='un'>
+                            value="Cardio">
                         <label class="form-check-label" for="category-cardio">
                             Cardio
                         </label>
@@ -136,12 +136,12 @@
         $('#input-name').val($('#name-'+exerciseID).text())
         $('#input-type').val($('#type-'+exerciseID).text())
 
-        if ($('#category-'+exerciseID).val() == 'Strength') {
+        if ($('#category-'+exerciseID).text() == 'Strength') {
             $('#category-strength').attr('checked', 'true');
-            $('#category-cardio').attr('checked', 'false');
+            $('#category-cardio').removeAttr('checked');
         } else {
-            $('#category-strength').attr('checked', 'false');
             $('#category-cardio').attr('checked', 'true');
+            $('#category-strength').removeAttr('checked');
         }
 
         $('#modal-form').append(
