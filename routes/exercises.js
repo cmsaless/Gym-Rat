@@ -39,9 +39,14 @@ router.post('/add', (req, res) => {
 });
 
 router.post('/delete', (req, res) => {
-    console.log('hit');
-    console.log(req.body);
-})
+    console.log('deleting');
+    User.update(
+        { _id: req.user._id },
+        { $pull: { exercises: { _id: req.body._id } } }, (err, result) => {
+            if (err) console.log(err);
+            res.redirect(302, '/exercises');
+        });
+});
 
 /********** Helper Functions **********/
 function compareExercises(a, b) {

@@ -51,7 +51,6 @@
                 <tbody>
                     {{#each exercises}}
                     <tr>
-                        <td>{{_id}}</td>
                         <td>{{name}}</td>
                         <td>{{category}}</td>
                         <td>{{type}}</td>
@@ -118,15 +117,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    function deleteExercise(_id) {
-        console.log('posting');
-        $.ajax({
-            type: "POST",
-            url: './exercises/delete',
-            data: JSON.stringify({ _id: _id }),
-            contentType: "application/json"
-        });
-    }
-</script>
