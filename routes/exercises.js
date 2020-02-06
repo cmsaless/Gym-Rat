@@ -38,8 +38,16 @@ router.post('/add', (req, res) => {
 
 });
 
+router.post('/edit', (req, res) => {
+    res.redirect('back');
+    return;
+    User.update(
+        {_id : req.user._id},
+        {$pull : {exercises : {}}}
+    );
+});
+
 router.post('/delete', (req, res) => {
-    console.log('deleting');
     User.update(
         { _id: req.user._id },
         { $pull: { exercises: { _id: req.body._id } } }, (err, result) => {
