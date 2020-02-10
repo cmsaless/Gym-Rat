@@ -61,6 +61,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
         if (err) return err;
+        // Need to change so hashed password isn't being sent in requests
         done(null, user);
     });
 });
@@ -133,6 +134,29 @@ app.use('/info', info);
 
 const profile = require(__routesdir + 'profile');
 app.use('/profile', profile);
+
+const exercises = require(__routesdir + 'exercises');
+app.use('/exercises', exercises);
+
+app.use((req, res, next) => {
+
+    res.status(404);
+
+    // respond with html page
+    if (req.accepts('html')) {
+        res.render('error.hbs', { url: req.url });
+        return;
+    }
+
+    // respond with json
+    if (req.accepts('json')) {
+        res.send({ error: 'Not found' });
+        return;
+    }
+
+    // default to plain-text. send()
+    res.type('txt').send('Not found');
+});
 
 // Good to go! Let's listen for connections now.
 app.listen(port, () => {

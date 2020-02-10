@@ -48,7 +48,7 @@ router.get('/', (req, res) => {
             };
             updateViews.push(updateViewModel);
         });
-        res.render('news', { month: strMonth, year: year, updates: updateViews });
+        res.render('news/news', { month: strMonth, year: year, updates: updateViews });
     });
 });
 
@@ -69,7 +69,7 @@ router.get('/view/:id', (req, res) => {
             createdAt: utils.formatDate(update.createdAt)
         };
 
-        res.render('newsView', { user: req.user, update: updateViewModel });
+        res.render('news/newsView', { user: req.user, update: updateViewModel });
     });
 });
 
@@ -91,7 +91,7 @@ router.get('/all', (req, res) => {
             updateViews.push(updateViewModel);
         });
         let countStr = req.query.limit == null ? "All" : count;
-        res.render('newsAll', { limit: countStr, updates: updateViews })
+        res.render('news/newsAll', { limit: countStr, updates: updateViews })
     });
 })
 
@@ -116,9 +116,10 @@ router.post('/add', (req, res) => {
         title: req.body.title,
         subtitle: req.body.subtitle,
         description: req.body.description,
+        // author should be really be author id in case author changes name
         author: req.user.username,
         createdAt: new Date(),
-        // month might be neccessary anymore? use caution
+        // month might not be neccessary anymore? use caution
         month: new Date().getMonth().toString(),
         banner: req.body.banner,
     });
@@ -142,7 +143,7 @@ router.get('/edit/:id', (req, res) => {
             console.log(err);
             return;
         }
-        res.render('newsEdit', { update: update });
+        res.render('news/newsEdit', { update: update });
     });
 });
 
@@ -167,7 +168,7 @@ router.post('/edit/:id', (req, res) => {
                 console.log(err);
                 return;
             }
-            res.render('newsView', { user: req.user, update: doc });
+            res.render('news/newsView', { user: req.user, update: doc });
         });
 });
 

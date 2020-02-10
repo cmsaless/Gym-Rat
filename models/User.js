@@ -25,7 +25,22 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false,
         required: true
-    }
+    },
+    exercises: [{
+        name: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        type: {
+            type: String,
+            required: true
+        },
+        category: {
+            type: String,
+            required: true
+        }
+    }]
 });
 
 module.exports = mongoose.model('users', UserSchema);

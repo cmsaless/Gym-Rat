@@ -22,13 +22,13 @@
     </div>
     <div class='row'>
         <div class='col col-md-4 div-btn-panel'>
-            <button class='btn btn-primary btn-profile'>Exercises</button>
+            <button class='btn btn-primary btn-profile' id='btn-exercises'>Exercises</button>
         </div>
         <div class='col col-md-4 div-btn-panel'>
-            <button class='btn btn-info btn-profile'>Routines</button>
+            <button class='btn btn-info btn-profile' id='btn-routines'>Routines</button>
         </div>
         <div class='col col-md-4 div-btn-panel'>
-            <button class='btn btn-success btn-profile'>Stats</button>
+            <button class='btn btn-success btn-profile' id='btn-stats'>Stats</button>
         </div>
     </div>
     <div class='row'>
@@ -38,3 +38,9 @@
         </div>
     </div>
 </div>
+
+<script>
+$('#btn-exercises').click(() => { window.location.href = '/exercises' });
+$('#btn-routines').click(() => { window.location.href = '/routines' });
+$('#btn-stats').click(() => { window.location.href = '/stats' });
+</script>
