@@ -21,7 +21,7 @@
             <div class="dropdown-limit">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Training
+                    {{sortedBy}}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="/exercises">All</a>
@@ -31,9 +31,9 @@
                 </div>
             </div>
 
-            <input type='text' name='Search' placeholder="Filter">
+            {{!-- <input type='text' name='Search' placeholder="Filter">
 
-            <button class='btn btn-primary'>Refresh</button>
+            <button class='btn btn-primary'>Refresh</button> --}}
 
         </div>
 
@@ -163,4 +163,4 @@
         $("#modal-form").attr('action', '/exercises/edit');
     });
 
-</script>k
+</script>

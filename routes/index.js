@@ -32,10 +32,10 @@ router.get('/', (req, res) => {
                 };
                 updateViews.push(updateViewModel);
             });
-            res.render('dashboard', { updates: updateViews });
+            res.render('index/dashboard', { updates: updateViews });
         });
     } else {
-        res.render('index');
+        res.render('index/index');
     }
 });
 

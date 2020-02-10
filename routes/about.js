@@ -7,7 +7,7 @@ router.all('/*', (req, res ,next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('about');
+    res.render('about/about');
 });
 
 module.exports = router;

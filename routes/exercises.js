@@ -25,7 +25,9 @@ router.get('/', (req, res) => {
         retArr = req.user.exercises;
     }
 
-    res.render('exercises/exercises.hbs', { exercises: retArr.sort(compareExercises) });
+    trainingCategory = trainingCategory == null ? "All" : trainingCategory.charAt(0).toUpperCase() + trainingCategory.slice(1);
+
+    res.render('exercises/exercises.hbs', { sortedBy: trainingCategory, exercises: retArr.sort(compareExercises) });
 });
 
 router.post('/add', (req, res) => {
