@@ -124,24 +124,33 @@
 <script>
 
     $(document).on('click', '#btn-add-exercise', () => {
+
+        $('#input-name').val("");
+        $('#input-type').val("");
+
+
         $('#h5-modal-title').text("Add Exercise");
         $("#modal-form").attr('action', '/exercises/add');
+        $('#category-strength').removeAttr('checked');
+        $('#category-cardio').removeAttr('checked');
+        $('#category-strength').attr('checked', 'true');
     });
 
-    $(document).on("click", ".btn-edit-exercise", function () {
+    $(document).on("click", ".btn-edit-exercise", function()  {
         
         $('#h5-modal-title').text("Edit Exercise");
         
         let exerciseID = $(this).data('id');
-        $('#input-name').val($('#name-'+exerciseID).text())
-        $('#input-type').val($('#type-'+exerciseID).text())
+        $('#input-name').val($('#name-'+exerciseID).text());
+        $('#input-type').val($('#type-'+exerciseID).text());
+
+        $('#category-strength').removeAttr('checked');
+        $('#category-cardio').removeAttr('checked');
 
         if ($('#category-'+exerciseID).text() == 'Strength') {
             $('#category-strength').attr('checked', 'true');
-            $('#category-cardio').removeAttr('checked');
         } else {
             $('#category-cardio').attr('checked', 'true');
-            $('#category-strength').removeAttr('checked');
         }
 
         $('#modal-form').append(
