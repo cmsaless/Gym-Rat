@@ -138,6 +138,9 @@ app.use('/profile', profile);
 const exercises = require(__routesdir + 'exercises');
 app.use('/exercises', exercises);
 
+const workouts = require(__routesdir + 'workouts');
+app.use('/workouts', workouts);
+
 app.use((req, res, next) => {
 
     res.status(404);
