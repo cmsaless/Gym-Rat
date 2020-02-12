@@ -26,6 +26,30 @@ const UserSchema = new Schema({
         default: false,
         required: true
     },
+    routines: [
+        {
+            name: {
+                type: String,
+                required: true,
+                unique: true
+            },
+            exercises: [{
+                name: {
+                    type: String,
+                    required: true,
+                    unique: true,
+                },
+                reps: {
+                    type: Number,
+                    required: true
+                },
+                sets: {
+                    type: Number,
+                    required: true
+                }
+            }]
+        }
+    ],
     exercises: [{
         name: {
             type: String,

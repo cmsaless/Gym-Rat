@@ -7,9 +7,9 @@ describe('/middleware/parseRoutines.js', () => {
 
             exercises = [{ name: "Squats", sets: 3, reps: 10 }];
 
-            let names = ['Squats'];
-            let sets = ['3'];
-            let reps = ['10'];
+            let names = 'Squats';
+            let sets = '3';
+            let reps = '10';
             let retval = parseRoutines.extractExercises(names, sets, reps);
 
             assert.deepEqual(exercises, retval)
@@ -72,7 +72,7 @@ describe('/middleware/parseRoutines.js', () => {
 
             assert.deepEqual(exercises, retval)
         });
-        it(`should return array w/ 3 exercises
+        it(`should return array w/ 2 exercises
             Bench Press 3x10,
             Leg Curls 4x8`, () => {
 

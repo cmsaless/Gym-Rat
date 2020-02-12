@@ -1,22 +1,49 @@
 var parseRoutines = {
-    extractExercises: (namesArr, setsArr, repsArr) => {
 
-        if (namesArr.length != setsArr.length || setsArr.length != repsArr.length) {
-            return [];
-        }
+    createRoutine: function (requestObject) {
 
-        let exercises = []
+        let routineName = requestObject['routine-name'];
+        let exercises = this.extractExercises(requestObject['exercise-name'], requestObject['exercise-sets'], requestObject['exercise-reps']);
 
-        for (let i = 0; i < namesArr.length; i++) {
-            if (namesArr[i] == "") {
-                continue;
-            }
-            let exercise = {
-                name: namesArr[i],
-                sets: Number.isNaN(parseInt(setsArr[i])) ? 0 : parseInt(setsArr[i]),
-                reps: Number.isNaN(parseInt(repsArr[i])) ? 0 : parseInt(repsArr[i])
+        let routine = {
+            name: routineName,
+            exercises: exercises
+        };
+
+        return routine;
+    },
+
+    extractExercises: (names, sets, reps) => {
+
+        let exercises = [];
+
+        if (typeof names === 'string') {
+
+            exercise = {
+                name: names,
+                sets: sets,
+                reps: reps
             };
-            exercises.push(exercise);
+
+            exercises.push(exercise)
+
+        } else {
+
+            if (names.length != sets.length || sets.length != reps.length) {
+                return [];
+            }
+
+            for (let i = 0; i < names.length; i++) {
+                if (names[i] == "") {
+                    continue;
+                }
+                let exercise = {
+                    name: names[i],
+                    sets: Number.isNaN(parseInt(sets[i])) ? 0 : parseInt(sets[i]),
+                    reps: Number.isNaN(parseInt(reps[i])) ? 0 : parseInt(reps[i])
+                };
+                exercises.push(exercise);
+            }
         }
 
         return exercises;
