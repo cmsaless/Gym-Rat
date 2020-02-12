@@ -1,44 +1,42 @@
-<link rel="stylesheet" href="/styles/news.css" />
+
 <link rel="stylesheet" href="/styles/routines.css" />
 
 <div class='container'>
 
     <div class='row'>
-        <div class='col'>
+
+        <div class='col col-md-10 col-center'>
+
             <h1>Add routine</h1>
-        </div>
-    </div>
 
-    <div class='row'>
-
-        <div class='col'>
-
-            <form>
+            <form action='/routines/add' method='post'>
 
                 <div class='form-group'>
-                    <label for='nameInput'>Name</label>
                     <input name='name' class='form-control' id='nameInput' placeholder="Name">
                 </div>
 
                 <hr>
 
-                <button class='btn btn-success btn-add-exercise' type="button">Add Exercise</button>
+                <div>
 
-                <div class="form-row">
-                    <div class='form-group col-md'>
-                        <button class='btn btn-danger' type="button">X</button>
+                    <div class="form-row" id="first-exercise">
+                        <div class="form-group col-md-7">
+                            <input type="text" class="form-control" name="watch" value="" placeholder="Exercise">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="text" class="form-control" placeholder="Reps">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="text" class="form-control" placeholder="Sets">
+                        </div>
+                        <div class='form-group col-md-1'>
+                        </div>
                     </div>
-                    <div class="form-group col-md-5">
-                        <input type="text" class="form-control" name="watch" value="" placeholder="Exercise">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <input type="text" class="form-control" placeholder="Number of Reps">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <input type="text" class="form-control" placeholder="Number of Sets">
-                    </div>
+
+                    <button class='btn btn-success btn-add-exercise' type="button">Add Exercise</button>
                 </div>
-
+                <hr>
+                <button class='btn btn-primary'>Submit</button>
             </form>
 
         </div>
@@ -52,20 +50,25 @@
         let numOfInputs = $('.exercise-input').length;
         let html = `
             <div class="form-row">
-                <div class='form-group col-md'>
-                    <button class='btn btn-danger' type="button">X</button>
-                </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-7">
                     <input type="text" class="form-control" name="watch" value="" placeholder="Exercise">
                 </div>
-                <div class="form-group col-md-3">
-                    <input type="text" class="form-control" placeholder="Number of Reps">
+                <div class="form-group col-md-2">
+                    <input type="text" class="form-control" placeholder="Reps">
                 </div>
-                <div class="form-group col-md-3">
-                    <input type="text" class="form-control" placeholder="Number of Sets">
+                <div class="form-group col-md-2">
+                    <input type="text" class="form-control" placeholder="Sets">
+                </div>
+                <div class='form-group col-md'>
+                    <button class='btn btn-danger btn-del-exercise' type="button">X</button>
                 </div>
             </div>
             `;
-        $(this).parent().append(html);
+        $(html).insertBefore(this);
+    });
+    $(document).on('click', '.btn-del-exercise', function () {
+        $(this).parent().parent().fadeOut(300, () => {
+            $(this).remove();
+        })
     });
 </script>
