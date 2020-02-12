@@ -49,7 +49,7 @@ app.use(session({
     secret: 'chrisisbest',
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 120000 }
+    cookie: { maxAge: null }
 }));
 
 // Serializing the user will store their id as a cookie in the client's browser.

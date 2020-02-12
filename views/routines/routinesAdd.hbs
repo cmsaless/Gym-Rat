@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="/styles/news.css" />
+<link rel="stylesheet" href="/styles/routines.css" />
+
+<div class='container'>
+
+    <div class='row'>
+        <div class='col'>
+            <h1>Add routine</h1>
+        </div>
+    </div>
+
+    <div class='row'>
+
+        <div class='col'>
+
+            <form>
+
+                <div class='form-group'>
+                    <label for='nameInput'>Name</label>
+                    <input name='name' class='form-control' id='nameInput' placeholder="Name">
+                </div>
+
+                <hr>
+
+                <button class='btn btn-success btn-add-exercise' type="button">Add Exercise</button>
+
+                <div class="form-row">
+                    <div class='form-group col-md'>
+                        <button class='btn btn-danger' type="button">X</button>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <input type="text" class="form-control" name="watch" value="" placeholder="Exercise">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" placeholder="Number of Reps">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input type="text" class="form-control" placeholder="Number of Sets">
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(document).on('click', '.btn-add-exercise', function () {
+        let numOfInputs = $('.exercise-input').length;
+        let html = `
+            <div class="form-row">
+                <div class='form-group col-md'>
+                    <button class='btn btn-danger' type="button">X</button>
+                </div>
+                <div class="form-group col-md-5">
+                    <input type="text" class="form-control" name="watch" value="" placeholder="Exercise">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" placeholder="Number of Reps">
+                </div>
+                <div class="form-group col-md-3">
+                    <input type="text" class="form-control" placeholder="Number of Sets">
+                </div>
+            </div>
+            `;
+        $(this).parent().append(html);
+    });
+</script>

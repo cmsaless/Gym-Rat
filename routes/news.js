@@ -102,7 +102,7 @@ router.get('/add', (req, res) => {
         return;
     }
 
-    res.render('newsAdd');
+    res.render('news/newsAdd');
 });
 
 router.post('/add', (req, res) => {

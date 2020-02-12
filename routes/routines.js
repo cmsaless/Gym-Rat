@@ -16,4 +16,8 @@ router.get('/', (req, res) => {
     res.render('routines/routines')
 });
 
+router.get('/add', (req, res) => {
+    res.render('routines/routinesAdd')
+})
+
 module.exports = router;
