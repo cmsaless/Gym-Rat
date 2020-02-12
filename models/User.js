@@ -33,6 +33,21 @@ const UserSchema = new Schema({
                 required: true,
                 unique: true
             },
+            createdAt: {
+                type: Date,
+                default: new Date(),
+                required: true
+            },
+            inUse: {
+                type: Boolean,
+                default: true,
+                required: true
+            },
+            numOfTimesCompleted: {
+                type:Number,
+                default: 0,
+                required: true
+            },
             exercises: [{
                 name: {
                     type: String,
