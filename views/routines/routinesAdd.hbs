@@ -12,7 +12,7 @@
             <form action='/routines/add' method='post'>
 
                 <div class='form-group'>
-                    <input name='name' class='form-control' id='nameInput' placeholder="Name">
+                    <input name='routine-name' class='form-control' id='nameInput' placeholder="Name">
                 </div>
 
                 <hr>
@@ -21,13 +21,13 @@
 
                     <div class="form-row" id="first-exercise">
                         <div class="form-group col-md-7">
-                            <input type="text" class="form-control" name="watch" value="" placeholder="Exercise">
+                            <input name='exercise-name' class="form-control" placeholder="Exercise">
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="text" class="form-control" placeholder="Reps">
+                            <input name='exercise-sets' class="form-control" placeholder="Sets">
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="text" class="form-control" placeholder="Sets">
+                            <input name='exercise-reps' class="form-control" placeholder="Reps">
                         </div>
                         <div class='form-group col-md-1'>
                         </div>
@@ -36,7 +36,7 @@
                     <button class='btn btn-success btn-add-exercise' type="button">Add Exercise</button>
                 </div>
                 <hr>
-                <button class='btn btn-primary'>Submit</button>
+                <button class='btn btn-primary' value="submit">Submit</button>
             </form>
 
         </div>
@@ -51,15 +51,15 @@
         let html = `
             <div class="form-row">
                 <div class="form-group col-md-7">
-                    <input type="text" class="form-control" name="watch" value="" placeholder="Exercise">
+                    <input name='exercise-name' class="form-control" placeholder="Exercise">
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="text" class="form-control" placeholder="Reps">
+                    <input name='exercise-sets' class="form-control" placeholder="Sets">
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="text" class="form-control" placeholder="Sets">
+                    <input name='exercise-reps' class="form-control" placeholder="Reps">
                 </div>
-                <div class='form-group col-md'>
+                <div class='form-group col-md-1'>
                     <button class='btn btn-danger btn-del-exercise' type="button">X</button>
                 </div>
             </div>

@@ -1,5 +1,5 @@
-var Utils = {
-    formatDate: function (date) {
+let Utils = {
+    formatDate: (date) => {
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let ampm = 12 <= hours ? 'pm' : 'am';
@@ -9,7 +9,7 @@ var Utils = {
         let strTime = hours + ':' + minutes + ' ' + ampm;
         return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear() + " " + strTime;
     },
-    shortenDescription: function (description, maxLength) {
+    shortenDescription: (description, maxLength) => {
 
         if (description.length < maxLength) {
             return description;

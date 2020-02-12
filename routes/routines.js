@@ -20,4 +20,8 @@ router.get('/add', (req, res) => {
     res.render('routines/routinesAdd')
 })
 
+router.post('/add', (req, res) => {
+    console.log(req.body)
+})
+
 module.exports = router;

@@ -113,6 +113,7 @@ app.use((req, res, next) => {
     next();
 });
 
+
 // This variable points to the directory where the route files are.
 const __routesdir = __dirname + "/routes/"
 
