@@ -1,6 +1,8 @@
+const Utils = require('./utils.js');
+
 var parseRoutines = {
 
-    createRoutine: function (requestObject) {
+    createRoutine: (requestObject) => {
 
         let routineName = requestObject['routine-name'];
         let exercises = this.extractExercises(requestObject['exercise-name'], requestObject['exercise-sets'], requestObject['exercise-reps']);
@@ -47,6 +49,20 @@ var parseRoutines = {
         }
 
         return exercises;
+    },
+
+    createViewModel: (routine) => {
+        
+        let routineViewModel = {
+            inUse: routine.inUse ? '✅' : '❌',
+            name: routine.name,
+            numOfExercises: routine.exercises.length,
+            numOfTimesCompleted: routine.numOfTimesCompleted,
+            createdAtFormatted: Utils.formatDate(routine.createdAt),
+            _id: routine._id
+        };
+
+        return routineViewModel;
     }
 }
 

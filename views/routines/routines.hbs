@@ -38,15 +38,13 @@
                         <td>{{numOfTimesCompleted}}</td>
                         <td>{{createdAtFormatted}}</td>
                         <td>
-                            <a class='btn btn-warning' href='/routines/edit'>
+                            <a class='btn btn-warning' href='/routines/edit/{{_id}}'>
                                 Edit
                             </a>
                         </td>
                         <td>
                             <form action='/routines/delete' method='post'>
-
                                 <input type='hidden' name='_id' value='{{_id}}'>
-
                                 <button class='btn btn-danger' type='submit' value='Submit'>Delete</button>
                             </form>
                         </td>

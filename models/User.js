@@ -54,32 +54,32 @@ const UserSchema = new Schema({
                     required: true,
                     unique: true,
                 },
-                reps: {
+                sets: {
                     type: Number,
                     required: true
                 },
-                sets: {
+                reps: {
                     type: Number,
                     required: true
                 }
             }]
         }
-    ],
-    exercises: [{
-        name: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        type: {
-            type: String,
-            required: true
-        },
-        category: {
-            type: String,
-            required: true
-        }
-    }]
+    ]
+    // exercises: [{
+    //     name: {
+    //         type: String,
+    //         required: true,
+    //         unique: true
+    //     },
+    //     type: {
+    //         type: String,
+    //         required: true
+    //     },
+    //     category: {
+    //         type: String,
+    //         required: true
+    //     }
+    // }]
 });
 
 module.exports = mongoose.model('users', UserSchema);

@@ -3,6 +3,7 @@ const User = require('../models/User');
 const sanitize = require('mongo-sanitize');
 const ParseRoutines = require('../middleware/parseRoutines');
 const Utils = require('../middleware/utils.js');
+const ObjectId = require('mongodb').ObjectId;
 
 const router = express.Router();
 
@@ -16,22 +17,14 @@ router.all('/*', (req, res, next) => {
 
 router.get('/', (req, res) => {
 
-    let routinesViewModel = [];
+    let routineViewModels = [];
 
-    for (let i=0; i<req.user.routines.length; ++i) {
+    for (let i = 0; i < req.user.routines.length; ++i) {
         const routine = req.user.routines[i];
-        console.log(routine);
-        routineViewModel = {
-            inUse: routine.inUse ? '✅' : '❌',
-            name: routine.name,
-            numOfExercises: routine.exercises.length,
-            numOfTimesCompleted: routine.numOfTimesCompleted,
-            createdAtFormatted: Utils.formatDate(routine.createdAt)
-        };
-        routinesViewModel.push(routineViewModel);
+        routineViewModels.push(ParseRoutines(routine));
     }
 
-    res.render('routines/routines', { routines: routinesViewModel })
+    res.render('routines/routines', { routines: routineViewModels })
 });
 
 router.get('/add', (req, res) => {
@@ -51,7 +44,24 @@ router.post('/add', (req, res) => {
             res.redirect(302, '/routines')
         }
     )
+});
 
-})
+router.get('/edit/:id', (req, res) => {
+    let userRoutine = req.user.routines.find(routine => routine._id.equals(ObjectId(req.params.id)));
+    res.render('routines/routinesEdit', { routine: userRoutine });
+});
+
+router.post('/edit/', (req, res) => {
+
+});
+
+router.post('/delete', (req, res) => {
+    User.update(
+        { _id: req.user._id },
+        { $pull: { routines: { _id: req.body._id } } }, (err, result) => {
+            if (err) console.log(err);
+            res.redirect(302, '/routines');
+        });
+});
 
 module.exports = router;
