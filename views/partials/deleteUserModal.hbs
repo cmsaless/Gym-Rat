@@ -1,0 +1,22 @@
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id='deleteForm' action='/profile/deleteUser' method='post'>
+                <div class="modal-body">
+                    <span>
+                        Are you sure you want to delete your account? It's permanent.
+                    </span>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" value='Submit' class="btn btn-danger">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

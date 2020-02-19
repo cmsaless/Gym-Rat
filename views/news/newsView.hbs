@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/styles/news.css" />
+
+<div class='container'>
+    <div class='row'>
+
+        <div class='col col-md-12'>
+            {{#if user.isAdmin}}
+            <a id='btn-edit' class='btn btn-primary' href='/news/edit/{{update.id}}' role='button'>Edit</a>
+            <button id='btn-del' class='btn btn-danger'>Delete</button>
+            {{/if}}
+            <h1>{{update.title}}</h1>
+            <h3>{{update.subtitle}}</h3>
+
+            <br>
+
+            <p>{{update.description}}</p>
+
+            <p>- {{update.author}}</p>
+            <p><i>{{update.createdAt}}</i></p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $('#btn-del').click(() => {
+        alert("BEWARE!");
+    });
+</script>

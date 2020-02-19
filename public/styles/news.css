@@ -1,0 +1,44 @@
+.p-update-description {
+    margin-top: 1rem;
+}
+
+#div-see-all {
+    margin-top: 2rem;
+}
+
+/* move to news.css */
+.link-update-box {
+    color: black;
+}
+
+/* move to news.css */
+.link-update-box:hover {
+    text-decoration: none;
+}
+
+/* move to news.css */
+.update-box {
+    border: 1px solid black;
+    text-align: left;
+    margin-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    cursor: pointer;
+}
+
+/* move to news.css */
+.update-box:hover {
+    border-color: lightblue;
+    background-color: lightblue;
+    color: white;
+}
+
+/* move to news.css */
+.dropdown-limit {
+    margin-bottom: 2em;
+}
+
+.col-md-8 {
+    text-align: center;
+    margin: auto;
+}

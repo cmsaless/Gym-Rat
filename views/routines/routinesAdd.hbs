@@ -1,0 +1,74 @@
+
+<link rel="stylesheet" href="/styles/routines.css" />
+
+<div class='container'>
+
+    <div class='row'>
+
+        <div class='col col-md-10 col-center'>
+
+            <h1>Add routine</h1>
+
+            <form action='/routines/add' method='post'>
+
+                <div class='form-group'>
+                    <input name='routine-name' class='form-control' id='nameInput' placeholder="Name">
+                </div>
+
+                <hr>
+
+                <div>
+
+                    <div class="form-row" id="first-exercise">
+                        <div class="form-group col-md-7">
+                            <input name='exercise-name' class="form-control" placeholder="Exercise">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input name='exercise-sets' class="form-control" placeholder="Sets">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input name='exercise-reps' class="form-control" placeholder="Reps">
+                        </div>
+                        <div class='form-group col-md-1'>
+                        </div>
+                    </div>
+
+                    <button class='btn btn-success btn-add-exercise' type="button">Add Exercise</button>
+                </div>
+                <hr>
+                <button class='btn btn-primary' value="submit">Submit</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $(document).on('click', '.btn-add-exercise', function () {
+        let numOfInputs = $('.exercise-input').length;
+        let html = `
+            <div class="form-row">
+                <div class="form-group col-md-7">
+                    <input name='exercise-name' class="form-control" placeholder="Exercise">
+                </div>
+                <div class="form-group col-md-2">
+                    <input name='exercise-sets' class="form-control" placeholder="Sets">
+                </div>
+                <div class="form-group col-md-2">
+                    <input name='exercise-reps' class="form-control" placeholder="Reps">
+                </div>
+                <div class='form-group col-md-1'>
+                    <button class='btn btn-danger btn-del-exercise' type="button">X</button>
+                </div>
+            </div>
+            `;
+        $(html).insertBefore(this);
+    });
+    $(document).on('click', '.btn-del-exercise', function () {
+        $(this).parent().parent().fadeOut(300, () => {
+            $(this).remove();
+        })
+    });
+</script>

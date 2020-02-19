@@ -7,11 +7,7 @@ router.all('/*', (req, res ,next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('info', {id : req.query.q});
-});
-
-router.get('/:id', (req, res) => {
-    res.render('info', {id : req.params.id});
+    res.render('about/about');
 });
 
 module.exports = router;
