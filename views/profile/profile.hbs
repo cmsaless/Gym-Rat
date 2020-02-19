@@ -22,10 +22,10 @@
     </div>
     <div class='row'>
         <div class='col col-md-4 div-btn-panel'>
-            <button class='btn btn-primary btn-profile' id='btn-exercises'>Exercises</button>
+            <button class='btn btn-primary btn-profile' id='btn-exercises'>Routines</button>
         </div>
         <div class='col col-md-4 div-btn-panel'>
-            <button class='btn btn-info btn-profile' id='btn-routines'>Routines</button>
+            <button class='btn btn-info btn-profile' id='btn-routines'>Completed Workouts</button>
         </div>
         <div class='col col-md-4 div-btn-panel'>
             <button class='btn btn-success btn-profile' id='btn-stats'>Stats</button>
@@ -40,7 +40,17 @@
 </div>
 
 <script>
-$('#btn-exercises').click(() => { window.location.href = '/exercises' });
-$('#btn-routines').click(() => { window.location.href = '/routines' });
-$('#btn-stats').click(() => { window.location.href = '/stats' });
+    $('#btn-exercises').click(() => { window.location.href = '/routines' });
+    $('#btn-routines').click(() => { window.location.href = '/workouts' });
+    $('#btn-stats').click(() => { window.location.href = '/profile#' });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#btn-stats').hover(function () {
+            $(this).html('Coming soon');
+        }, function () {
+            $(this).html('Stats');
+        });
+    });
 </script>

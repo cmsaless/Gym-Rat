@@ -2,7 +2,7 @@ const Utils = require('./utils.js');
 
 var parseRoutines = {
 
-    createRoutine: (requestObject) => {
+    createRoutine: function(requestObject) {
 
         let routineName = requestObject['routine-name'];
         let exercises = this.extractExercises(requestObject['exercise-name'], requestObject['exercise-sets'], requestObject['exercise-reps']);

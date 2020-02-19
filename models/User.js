@@ -43,11 +43,6 @@ const UserSchema = new Schema({
                 default: true,
                 required: true
             },
-            numOfTimesCompleted: {
-                type:Number,
-                default: 0,
-                required: true
-            },
             exercises: [{
                 name: {
                     type: String,

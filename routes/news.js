@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
                 id: update._id,
                 title: update.title,
                 subtitle: update.subtitle,
-                formattedDate : utils.formatDate(date),
+                formattedDate: utils.formatDate(date),
                 author: update.author,
                 shortenedDescription: utils.shortenDescription(update.description, 300)
             };
@@ -55,10 +55,7 @@ router.get('/', (req, res) => {
 router.get('/view/:id', (req, res) => {
 
     Update.findOne(ObjectId(req.params.id), (err, update) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
+        if (err) return;
 
         let updateViewModel = {
             id: update._id,
@@ -128,7 +125,7 @@ router.post('/add', (req, res) => {
         res.redirect(302, '/news');
     }).catch(err => {
         console.log(err);
-    })
+    });
 });
 
 router.get('/edit/:id', (req, res) => {
@@ -139,10 +136,7 @@ router.get('/edit/:id', (req, res) => {
     }
 
     Update.findOne(ObjectId(req.params.id), (err, update) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
+        if (err) return;
         res.render('news/newsEdit', { update: update });
     });
 });
@@ -161,14 +155,11 @@ router.post('/edit/:id', (req, res) => {
             description: req.body.description,
             modifiedBy: req.user.username,
             modifiedAt: new Date()
-        }, 
+        },
         { new: true },
         (err, doc) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            res.render('news/newsView', { user: req.user, update: doc });
+            if (err) return;
+            res.redirect(302, '/news/view/' + req.params.id);
         });
 });
 

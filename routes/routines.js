@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 
     for (let i = 0; i < req.user.routines.length; ++i) {
         const routine = req.user.routines[i];
-        routineViewModels.push(ParseRoutines(routine));
+        routineViewModels.push(ParseRoutines.createViewModel(routine));
     }
 
     res.render('routines/routines', { routines: routineViewModels })
@@ -47,19 +47,32 @@ router.post('/add', (req, res) => {
 });
 
 router.get('/edit/:id', (req, res) => {
+
     let userRoutine = req.user.routines.find(routine => routine._id.equals(ObjectId(req.params.id)));
+    userRoutine.createdAt = Utils.formatDate(userRoutine.createdAt);
+
     res.render('routines/routinesEdit', { routine: userRoutine });
 });
 
-router.post('/edit/', (req, res) => {
+router.post('/edit', (req, res) => {
 
+    let updatedRoutine = ParseRoutines.createRoutine(req.body);
+
+    console.log(updatedRoutine);
+
+    User.findOneAndUpdate(
+        { _id: req.user._id, 'routines._id': ObjectId(req.body._id) },
+        { $set: { 'routines.$': updatedRoutine } }
+    );
+
+    res.redirect(302, '/routines');
 });
 
 router.post('/delete', (req, res) => {
     User.update(
         { _id: req.user._id },
         { $pull: { routines: { _id: req.body._id } } }, (err, result) => {
-            if (err) console.log(err);
+            if (err) return;
             res.redirect(302, '/routines');
         });
 });
