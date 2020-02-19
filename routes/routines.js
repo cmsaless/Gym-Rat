@@ -1,6 +1,5 @@
 const express = require('express');
 const User = require('../models/User');
-const sanitize = require('mongo-sanitize');
 const ParseRoutines = require('../middleware/parseRoutines');
 const Utils = require('../middleware/utils.js');
 const ObjectId = require('mongodb').ObjectId;
@@ -35,9 +34,12 @@ router.post('/add', (req, res) => {
 
     let newRoutine = ParseRoutines.createRoutine(req.body);
 
-    User.updateOne({ _id: req.user._id },
+    User.updateOne(
+        { _id: req.user._id },
         {
-            $push: { routines: newRoutine }
+            $push: {
+                routines: newRoutine
+            }
         },
         (err, raw) => {
             if (err) return;
@@ -58,20 +60,28 @@ router.post('/edit', (req, res) => {
 
     let updatedRoutine = ParseRoutines.createRoutine(req.body);
 
-    console.log(updatedRoutine);
-
-    User.findOneAndUpdate(
-        { _id: req.user._id, 'routines._id': ObjectId(req.body._id) },
-        { $set: { 'routines.$': updatedRoutine } }
+    User.update(
+        { 'routines._id': req.body._id },
+        {
+            $set: {
+                'routines.$.name': updatedRoutine.name
+            }
+        }, (err, result) => {
+            if (err) console.log(err);
+            res.redirect(302, '/routines');
+        }
     );
 
-    res.redirect(302, '/routines');
 });
 
 router.post('/delete', (req, res) => {
     User.update(
         { _id: req.user._id },
-        { $pull: { routines: { _id: req.body._id } } }, (err, result) => {
+        {
+            $pull: {
+                routines: { _id: req.body._id }
+            }
+        }, (err, result) => {
             if (err) return;
             res.redirect(302, '/routines');
         });
