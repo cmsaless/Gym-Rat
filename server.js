@@ -49,7 +49,7 @@ app.use(session({
     secret: 'chrisisbest',
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 120000 }
+    cookie: { maxAge: null }
 }));
 
 // Serializing the user will store their id as a cookie in the client's browser.
@@ -113,6 +113,7 @@ app.use((req, res, next) => {
     next();
 });
 
+
 // This variable points to the directory where the route files are.
 const __routesdir = __dirname + "/routes/"
 
@@ -137,6 +138,9 @@ app.use('/profile', profile);
 
 const exercises = require(__routesdir + 'exercises');
 app.use('/exercises', exercises);
+
+const routines = require(__routesdir + 'routines');
+app.use('/routines', routines);
 
 app.use((req, res, next) => {
 

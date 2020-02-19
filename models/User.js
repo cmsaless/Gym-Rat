@@ -26,21 +26,55 @@ const UserSchema = new Schema({
         default: false,
         required: true
     },
-    exercises: [{
-        name: {
-            type: String,
-            required: true,
-            unique: true
-        },
-        type: {
-            type: String,
-            required: true
-        },
-        category: {
-            type: String,
-            required: true
+    routines: [
+        {
+            name: {
+                type: String,
+                required: true,
+                unique: true
+            },
+            createdAt: {
+                type: Date,
+                default: new Date(),
+                required: true
+            },
+            inUse: {
+                type: Boolean,
+                default: true,
+                required: true
+            },
+            exercises: [{
+                name: {
+                    type: String,
+                    required: true,
+                    unique: true,
+                },
+                sets: {
+                    type: Number,
+                    required: true
+                },
+                reps: {
+                    type: Number,
+                    required: true
+                }
+            }]
         }
-    }]
+    ]
+    // exercises: [{
+    //     name: {
+    //         type: String,
+    //         required: true,
+    //         unique: true
+    //     },
+    //     type: {
+    //         type: String,
+    //         required: true
+    //     },
+    //     category: {
+    //         type: String,
+    //         required: true
+    //     }
+    // }]
 });
 
 module.exports = mongoose.model('users', UserSchema);

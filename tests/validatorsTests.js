@@ -70,5 +70,10 @@ describe('/public/js/validators.js', () => {
             let res = Validators.validateEmail(email);
             assert.equal(true, res);
         });
+        it('should return true; is valid', () => {
+            let email = 'jim.smoth@gmail.com';
+            let res = Validators.validateEmail(email);
+            assert.equal(true, res);
+        });
     });
 });

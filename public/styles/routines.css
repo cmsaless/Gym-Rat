@@ -1,0 +1,14 @@
+@media screen and (max-width: 767px) {
+    .btn-del-exercise {
+        margin-bottom: 1.5rem;
+        width: 100%;
+    }
+    #first-exercise {
+        margin-bottom: 1.5rem;
+    }
+}
+
+.col-center {
+    margin-left: auto;
+    margin-right: auto;
+}

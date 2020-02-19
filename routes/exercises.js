@@ -1,6 +1,4 @@
 const express = require('express');
-const Validators = require("../middleware/validators");
-const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const sanitize = require('mongo-sanitize');
 
@@ -15,7 +13,21 @@ router.all('/*', (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('exercises/exercises.hbs', { exercises: req.user.exercises.sort(compareExercises) });
+
+    let trainingCategory = req.query.training;
+
+    let retArr = []
+
+    if (trainingCategory != null) {
+        console.log(req.user.exercises);
+        retArr = req.user.exercises.filter((exericse) => exericse.category.toLowerCase() == trainingCategory.toLowerCase());
+    } else {
+        retArr = req.user.exercises;
+    }
+
+    trainingCategory = trainingCategory == null ? "All" : trainingCategory.charAt(0).toUpperCase() + trainingCategory.slice(1);
+
+    res.render('exercises/exercises.hbs', { sortedBy: trainingCategory, exercises: retArr.sort(compareExercises) });
 });
 
 router.post('/add', (req, res) => {

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/styles/profile.css" />
+<link rel="stylesheet" href="/styles/exercises.css" />
 
 <div class='container'>
 
@@ -10,34 +11,33 @@
 
     <div class='row'>
 
-        <div class='col col-md-2'>
+        <div class='col'>
 
-            <a class="btn btn-success btn-modal" id='btn-add-exercise' data-toggle="modal" data-target="#exerciseModal">
-                New Exercise
-            </a>
+            <div class='col'>
 
-            <hr />
+                <div class='row'>
 
-            <div class="dropdown-limit">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Training
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="/exercises">All</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/exercises?training=cardio">Cardio</a>
-                    <a class="dropdown-item" href="/exercises?training=strength">Strength</a>
+                    <a class="btn btn-success btn-modal" id='btn-add-exercise' data-toggle="modal"
+                        data-target="#exerciseModal">
+                        New Exercise
+                    </a>
+
+                    <div class="dropdown-limit">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{sortedBy}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/exercises">All</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/exercises?training=cardio">Cardio</a>
+                            <a class="dropdown-item" href="/exercises?training=strength">Strength</a>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
-
-            <input type='text' name='Search' placeholder="Filter">
-
-            <button class='btn btn-primary'>Refresh</button>
-
-        </div>
-
-        <div class='col col-md-10'>
 
             <table class='table'>
                 <thead>
@@ -45,6 +45,7 @@
                         <th scope='col'>Name</th>
                         <th scope='col'>Training</th>
                         <th scope='col'>Type</th>
+                        <th scope='col'></th>
                         <th scope='col'></th>
                     </tr>
                 </thead>
@@ -59,10 +60,12 @@
                                 data-target="#exerciseModal">
                                 Edit
                             </button>
+                        </td>
+                        <td>
                             <form action='/exercises/delete' method='post'>
-                                <div class="form-group">
-                                    <input type='hidden' name='_id' value='{{_id}}'>
-                                </div>
+
+                                <input type='hidden' name='_id' value='{{_id}}'>
+
                                 <button class='btn btn-danger' type='submit' value='Submit'>Delete</button>
                             </form>
                         </td>
@@ -136,18 +139,18 @@
         $('#category-strength').attr('checked', 'true');
     });
 
-    $(document).on("click", ".btn-edit-exercise", function()  {
-        
+    $(document).on("click", ".btn-edit-exercise", function () {
+
         $('#h5-modal-title').text("Edit Exercise");
-        
+
         let exerciseID = $(this).data('id');
-        $('#input-name').val($('#name-'+exerciseID).text());
-        $('#input-type').val($('#type-'+exerciseID).text());
+        $('#input-name').val($('#name-' + exerciseID).text());
+        $('#input-type').val($('#type-' + exerciseID).text());
 
         $('#category-strength').removeAttr('checked');
         $('#category-cardio').removeAttr('checked');
 
-        if ($('#category-'+exerciseID).text() == 'Strength') {
+        if ($('#category-' + exerciseID).text() == 'Strength') {
             $('#category-strength').attr('checked', 'true');
         } else {
             $('#category-cardio').attr('checked', 'true');
@@ -160,4 +163,4 @@
         $("#modal-form").attr('action', '/exercises/edit');
     });
 
-</script>k
+</script>
