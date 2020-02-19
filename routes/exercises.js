@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
     let retArr = []
 
     if (trainingCategory != null) {
-        console.log(req.user.exercises);
         retArr = req.user.exercises.filter((exericse) => exericse.category.toLowerCase() == trainingCategory.toLowerCase());
     } else {
         retArr = req.user.exercises;
