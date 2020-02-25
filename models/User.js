@@ -43,38 +43,48 @@ const UserSchema = new Schema({
                 default: true,
                 required: true
             },
-            exercises: [{
-                name: {
-                    type: String,
-                    required: true,
-                    unique: true,
-                },
-                sets: {
-                    type: Number,
-                    required: true
-                },
-                reps: {
-                    type: Number,
-                    required: true
+            exercises: [
+                {
+                    name: {
+                        type: String,
+                        required: true,
+                        unique: true,
+                    },
+                    sets: {
+                        type: Number,
+                        required: true
+                    },
+                    reps: {
+                        type: Number,
+                        required: true
+                    }
+                }]
+        }
+    ],
+    completedWorkouts: [
+        {
+            routineId: {
+                type: String,
+                required: true
+            },
+            dateCompleted: {
+                type: Date,
+                default: new Date(),
+                required: true
+            },
+            completedExercises: [
+                {
+                    exerciseId: {
+                        type: String,
+                        required: true
+                    },
+                    weights: [
+                        Number
+                    ]
                 }
-            }]
+            ]
         }
     ]
-    // exercises: [{
-    //     name: {
-    //         type: String,
-    //         required: true,
-    //         unique: true
-    //     },
-    //     type: {
-    //         type: String,
-    //         required: true
-    //     },
-    //     category: {
-    //         type: String,
-    //         required: true
-    //     }
-    // }]
 });
 
 module.exports = mongoose.model('users', UserSchema);

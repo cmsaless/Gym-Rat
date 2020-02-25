@@ -17,15 +17,15 @@
     </div>
     <div class='row'>
         <div class='col col-md-12 div-btn-panel'>
-            <button class='btn btn-warning btn-profile'>Start Workout</button>
+            <button class='btn btn-warning btn-profile' id='btn-start-workout'>Start Workout</button>
         </div>
     </div>
     <div class='row'>
         <div class='col col-md-4 div-btn-panel'>
-            <button class='btn btn-primary btn-profile' id='btn-exercises'>Routines</button>
+            <button class='btn btn-primary btn-profile' id='btn-routines'>Routines</button>
         </div>
         <div class='col col-md-4 div-btn-panel'>
-            <button class='btn btn-info btn-profile' id='btn-routines'>Completed Workouts</button>
+            <button class='btn btn-info btn-profile' id='btn-view-workouts'>Completed Workouts</button>
         </div>
         <div class='col col-md-4 div-btn-panel'>
             <button class='btn btn-success btn-profile' id='btn-stats'>Stats</button>
@@ -40,9 +40,11 @@
 </div>
 
 <script>
-    $('#btn-exercises').click(() => { window.location.href = '/routines' });
-    $('#btn-routines').click(() => { window.location.href = '/workouts' });
+    $('#btn-routines').click(() => { window.location.href = '/routines' });
+    $('#btn-view-workouts').click(() => { window.location.href = '/workouts' });
     $('#btn-stats').click(() => { window.location.href = '/profile#' });
+
+    $('#btn-start-workout').click(() => { window.location.href = '/workouts'})
 </script>
 
 <script>

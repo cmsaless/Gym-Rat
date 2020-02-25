@@ -96,7 +96,9 @@ router.post('/register', (req, res) => {
 
     // Salt and hash the password.
     bcrypt.genSalt(10, (err, salt) => {
+        
         if (err) return;
+        
         bcrypt.hash(password, salt, (err, hash) => {
 
             if (err) return;

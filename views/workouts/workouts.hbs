@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/styles/profile.css" />
+<link rel="stylesheet" href="/styles/routines.css" />
+
+<div class='container'>
+
+    <div class='row'>
+        <div class='col'>
+            <h1>Choose Your Workout!</h1>
+        </div>
+    </div>
+
+    <div class='row'>
+
+        <div class='col'>
+
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th scope='col'></th>
+                        <th scope='col'>Routine Name</th>
+                        <th scope='col'>Exercises</th>
+                        <th scope='col'>Times Completed</th>
+                        <th scope='col'>Last Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each routines}}
+                    <tr>
+                        <td>
+                            <a class='btn btn-success' href='/workouts/{{_id}}'>
+                                Go!
+                            </a>
+                        </td>
+                        <td>{{name}}</td>
+                        <td>{{numOfExercises}}</td>
+                        <td>{{numOfTimesCompleted}}</td>
+                        <td>{{lastCompleted}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
